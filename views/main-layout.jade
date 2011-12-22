@@ -1,0 +1,19 @@
+!!!
+html
+  head
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+    block extrahead
+
+  body
+    #menu
+      -if (user)
+        a(href="/logout/") Sair
+
+    - if (messages)
+      ul#messages
+      - each message in messages
+        li(class="message") #{message}
+
+    #content
+      block content

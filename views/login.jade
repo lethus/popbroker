@@ -1,0 +1,39 @@
+extends main-layout
+block extrahead
+ link(rel="stylesheet", href="/css/login.css")
+
+block content 
+  #box
+    #signup
+      h3 Cadastrar-se
+      
+      form(action="/signup/", method="POST")
+        p
+          label Email:
+          input(name="email")
+        p 
+          label Senha:
+          input(name="password1", type="password")
+    
+        p
+          label Confirme a Senha:
+          input(name="password2", type="password")
+    
+        p
+          input(type="submit", value="Cadastrar-se")
+  
+    #login
+      h3 Login
+  
+      form(action=".", method="POST")
+        p
+         label Email:
+         input(name="email")
+        p
+         label Senha:
+         input(name="password", type="password")
+
+        p
+         input(type="submit", value="Entrar")
+
+    p(clear="all")
