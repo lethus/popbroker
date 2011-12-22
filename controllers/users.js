@@ -45,7 +45,10 @@ module.exports = function (app) {
                     req.form.email, req.form.password,
                     function (err, user) {
                         if (user) {
-                            res.redirect('/');
+                            req.session.regenerate(function(){
+                                req.session.user = user;
+                                res.redirect('/');
+                            });
                         } else {
                             if (!req.session.messages)
                                 req.session.messages = [];
