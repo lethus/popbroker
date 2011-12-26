@@ -422,3 +422,6 @@ p{
 .social.facebook{background:url(../img/facebook.png) left center no-repeat;}
 .social.vimeo{background:url(../img/vimeo.png) left center no-repeat;}
 .social.nodejs { position: relative; top: -5px;}
+.login-label {color: white; }
+#login-box {display: block; width: 100%;}
+#login-box table {float: left;}

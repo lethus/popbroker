@@ -25,12 +25,8 @@ var MongoStore = require('connect-mongo'),
 
 var conf = {
   db: {
-    db: 'poupe',
+    db: 'popbroker',
     host: 'localhost',
-    port: 27017,  // optional, default: 27017
-    username: 'admin', // optional
-    password: 'secret', // optional
-    collection: 'mySessions' // optional, default: sessions
   },
   secret: 'lethus123'
 };

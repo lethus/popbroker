@@ -19,6 +19,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var models = require("./models.js");
+
 var form = require("express-form"),
     filter = form.filter,
     validate = form.validate;
@@ -40,15 +42,10 @@ var SignupForm = form(
         .required(null, "Digite o Email")
         .isEmail("Email inválido"),
 
-    filter("password1").trim(),
-    validate("password1")
-        .required(null, "Digite a senha"),
-
-    filter("password2").trim(),
-    validate("password2")
-        .required(null, "Digite a senha de confirmação")
-        .equals("field::password1", "as senhas devem ser iguais")
-)
+    filter("password").trim(),
+    validate("password")
+        .required(null, "Digite a senha")
+);
 
 
 exports.LoginForm = LoginForm;

@@ -1,9 +1,0 @@
-Projeto Poupe
-
-projeto feito utilizando nodeJS
-
-para instalar dependências:
-$ npm install
-
-para rodar o servidor:
-$ node app.js

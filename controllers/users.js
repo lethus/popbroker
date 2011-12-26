@@ -26,10 +26,6 @@ var utils = require('../utils.js');
 var User = models.User;
 
 module.exports = function (app) {
-    app.get('/login/', function(req, res){
-        res.render('login', {title: "Login"});
-    });
-
     app.get('/logout/', function(req, res){
         req.session.destroy(function(){
             res.redirect('/');
@@ -47,7 +43,7 @@ module.exports = function (app) {
                         if (user) {
                             req.session.regenerate(function(){
                                 req.session.user = user;
-                                res.redirect('/');
+                                res.redirect('/home/');
                             });
                         } else {
                             if (!req.session.messages)
@@ -73,12 +69,12 @@ module.exports = function (app) {
         function(req, res) {
             if (req.form.isValid) {
                 User.newUser(
-                    req.form.email, req.form.password1,
+                    req.form.email, req.form.password,
                     function (err, user) {
-                        if (user) {
+                        if ((user)&&(!err)) {
                             req.session.regenerate(function(){
                                 req.session.user = user;
-                                res.redirect('/');
+                                res.redirect('/home/');
                             });
                         } else {
                             res.redirect('back');

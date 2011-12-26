@@ -10,10 +10,5 @@ html
       -if (user)
         a(href="/logout/") Sair
 
-    - if (messages)
-      ul#messages
-      - each message in messages
-        li(class="message") #{message}
-
     #content
       block content

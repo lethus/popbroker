@@ -20,22 +20,43 @@
  */
 
 var mongoose = require('mongoose')
-  , crypto = require('crypto');
+  , crypto = require('crypto')
+  , mongoTypes = require('mongoose-types');
 
-mongoose.connect('mongodb://localhost/poupe');
+mongoTypes.loadTypes(mongoose, 'email');
+mongoose.connect('mongodb://localhost/popbroker');
 
 function hash (msg, key) {
   return crypto.createHmac('sha256', key).update(msg).digest('hex');
 };
 
+function required(val) { return val && val.length; }
+
 var Schema = mongoose.Schema
   , ObjectId = Schema.ObjectId;
 
 var UserSchema = new Schema({
-    pk: ObjectId,
-    email: String,
-    password: String
+    email: {
+        type: mongoose.SchemaTypes.Email,
+        validate: [required, 'Email é obrigatório'],
+        index: { unique: true }
+    },
+    password: {
+        type: String,
+        validate: [required, 'Senha é obrigatório'],
+    },
+    createdAt: {
+        type: Date,
+        'default': Date.now
+    }
 });
+
+UserSchema.path('email').validate(function (v, fn) {
+    User.count({email: v}, function (err, val) {
+        if (err) fn(false);
+        fn(val==0);
+    });
+}, 'Email duplicado'); 
 
 UserSchema.statics.authenticate = function (email, password, fn) {
     this.findOne({email: email}, function (err, user) {

@@ -6,6 +6,7 @@
       "express": "latest"
     , "jade": "latest"
     , "mongoose": "latest"
+    , "mongoose-types": "latest"
     , "express-form": "latest"
     , "underscore": "latest"
     , "connect-mongo": "latest"
