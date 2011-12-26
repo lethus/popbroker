@@ -1,8 +1,424 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+/*-----------------------------------------------------------------------------------*/
+/*	Start Global CSS
+/*-----------------------------------------------------------------------------------*/
+
+
+body{
+	font-size:12px;
+	font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-weight:normal;
 }
 
-a {
-  color: #00B7FF;
+.container{
+	width:960px;
+	margin:0px auto;
 }
+
+.clear{
+	clear:both;
+	height:0 !important;
+}
+
+h1, h2, h3, h4, h5, h6{
+	margin-bottom:20px;
+}
+
+h1{
+	font-size:30px;
+	font-weight:normal;
+}
+
+h1.page-header{
+	border-top:1px solid #EFEFEF;
+	border-bottom:1px solid #EFEFEF;
+	padding:20px 0px;
+	margin:0 0 40px 0;
+	color:#555555;
+}
+
+h2{
+	font-family: 'Droid Sans', sans-serif;
+	font-size:28px;
+	font-weight:bold;
+}
+
+h3{
+	font-family: 'Oswald', sans-serif;
+	font-size:24px;
+	font-weight:normal;
+	margin:0 0 8px 0;
+}
+
+h4{
+	font-family: 'Droid Sans', sans-serif;
+	font-size:20px;
+	font-weight:bold;
+}
+
+h5{
+	font-family: 'Droid Sans', sans-serif;
+	font-size:18px;
+	font-weight:bold;
+}
+
+h6{
+	font-family: 'Droid Sans', sans-serif;
+	font-size:16px;
+	font-weight:bold;
+}
+
+a{
+	outline:none;
+	color:#429CB3;
+	text-decoration:none;
+}
+
+a:hover{
+	color:#f26535;
+}
+
+pre{
+	border:1px solid #dddddd;
+	padding:15px;
+	font-size:10px;
+	margin:0 0 20px 0;
+}
+
+blockquote{
+	padding:15px;
+	border:1px solid #dddddd;
+	font-family:Georgia, "Times New Roman", Times, serif;
+	font-style:italic;
+	margin:0 0 20px 0;
+	font-size:18px;
+	line-height:34px;
+}
+
+blockquote span{
+	font-size:34px;
+}
+
+p{
+	color:#777777;
+	line-height:20px;
+	font-size:11px;
+}
+
+.grid p{
+	margin-bottom:20px;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	Header CSS
+/*-----------------------------------------------------------------------------------*/
+
+#header{
+	background:#1E1E1E;
+	padding:2px 0px;
+	color:#fff;
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	font-size:13px;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	Head Divider CSS
+/*-----------------------------------------------------------------------------------*/
+
+#head-break{
+	height:125px;
+	width:100%;
+	background:url(../img/break_tile.png) top center repeat-x;
+	text-align:center;
+	margin:0 0 50px 0;
+}
+
+#head-break img{ margin-top: 5px;}
+
+#head-break p, #register p{
+	padding:30px 0 0 0;
+	margin:0px;
+	color:#CCC;
+	text-transform:uppercase;
+	letter-spacing:1px;
+	font-size:10px;
+}
+
+#head-break h1, #register h1{
+	color:#fff;
+	font-size:24px;
+	font-weight:normal;
+	margin:0px;
+	padding:0px;
+	text-shadow: 1px 1px 0px #000000;
+	filter: dropshadow(color=#000000, offx=1, offy=1);
+}
+
+#head-break h2{
+    font-family: 'Droid Sans', sans-serif;
+	font-size:28px;
+	font-weight:bold;
+    color:#ffffff;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	Center Half Content CSS
+/*-----------------------------------------------------------------------------------*/
+
+#left, #right{
+	float:left;
+}
+
+#left{
+	width:500px;
+	height:487px;
+	overflow:hidden;
+	background:url(../img/imac.jpg) top center no-repeat;
+	margin:0 40px 0 0;
+}
+
+#right{
+	width:420px;
+	overflow:hidden;
+	padding:10px 0 0 0;
+}
+
+#right p{
+	font-size:13px;
+	line-height:24px;
+}
+
+#right h2{
+	margin:0 0 5px 0;
+	font-family:Georgia, "Times New Roman", Times, serif;
+	font-weight:normal;
+	font-style:italic;
+	font-size:30px;
+}
+
+#slides, #slides li{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#slides{
+	margin:25px 0 0 18px;
+}
+
+#slides li{
+	display: none;
+}
+
+.appstore{
+	position:relative;
+	margin:20px 0px;
+}
+
+.appstore, .appstore-hover{
+	display:block;
+	width:415px;
+	height:93px;
+	background:url(../img/appstore.png) center bottom no-repeat;
+	text-indent:-9999px;
+}
+
+.appstore-hover{
+	background-position:center top !important;
+	position:absolute;
+	top:-12;
+	left:0;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	register Area
+/*-----------------------------------------------------------------------------------*/
+
+#register{
+	height:125px;
+	width:100%;
+	background:url(../img/break_tile.png) top center repeat-x;
+	margin:0 0 50px 0;
+	color:#fff;
+	text-align:center;
+	display:none;
+}
+
+#register #close{
+	float:right;
+	margin:20px 20px 0 0;
+	cursor:pointer;
+}
+
+#register h2{
+	font-size:22px;
+	font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-weight:normal;
+	padding:5px 0 0 0;
+}
+
+#register p{
+	padding:10px 0 0 0;
+}
+
+#footer-register-email{
+	background: url("../img/register_bg_email.png") no-repeat scroll 0 0 transparent;
+	width:311px;
+	height:35px;
+	margin:10px 0 0 95px;
+	float: left;
+}
+
+#footer-register-pass{
+	background: url("../img/register_bg_pass.png") no-repeat scroll 0 0 transparent;
+	width:311px;
+	height:35px;
+	margin:10px 0 0 95px;
+	float: left;
+}
+
+#footer-register{
+	height:35px;
+	margin:5px 0 0 35px;
+	float: left;
+}
+
+#footer-register-email #input-text, #footer-register-pass #input-text{
+    background:none repeat scroll 0 0 transparent;
+    border:none;
+    font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-size: 12px;
+    height: 25px;
+    line-height: 2.4em;
+    padding: 5px 0 5px 10px;
+    width: 245px;
+	color:#fff;
+	float: left;
+}
+
+#footer-register .loginsubmit {width: 98px; height:40px; border: 1px solid #999; background: #a8a8a8 url('../img/login.btn.bg.png') repeat-x top; font-size: 20px; padding: 8px 0; -moz-border-radius: 5px; border-radius: 5px; -webkit-border-radius: 5px; text-shadow: 1px 1px 1px #ccc; font-weight: 600; -moz-box-shadow: 1px 1px 8px #999; box-shadow: 1px 1px 8px #999; -webkit-box-shadow: 1px 1px 8px #999; margin-bottom: 15px}
+#footer-register .loginsubmit:hover {cursor: pointer; background: #999}
+
+
+/*-----------------------------------------------------------------------------------*/
+/*	Image Lightbox Tiles CSS
+/*-----------------------------------------------------------------------------------*/
+
+#image-tiles{
+	background:none repeat scroll 0 0 #F5F5F5;
+	border-top:1px solid #CCC;
+	border-bottom:1px solid #CCC;
+	padding:20px 0px 17px 0;
+	margin:40px 0 0 0;
+}
+
+#image-tiles img{
+	margin:0 132px 0 0;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	border:1px solid #CFCFCF;
+	padding:8px;
+	cursor:pointer;
+}
+
+#image-tiles img:hover{
+	border:1px solid #cccccc;
+}
+
+#image-tiles img.last{
+	margin:0px!important;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	Feature Tiles CSS
+/*-----------------------------------------------------------------------------------*/
+
+#feature-tiles{
+	margin:20px 0px;
+}
+
+.feature{
+	float:left;
+	width:278px;
+}
+
+.feature.left{
+	padding:30px 25px 30px 0px;
+}
+
+.feature.border{
+	border-right:1px solid #ccc;
+	border-left:1px solid #ccc;
+	padding:30px 25px;
+}
+
+.feature.last{
+	margin:0px !important;
+	padding:30px 0px 30px 25px;
+}
+
+.feature h4{
+	font-family: 'Droid Sans', sans-serif;
+	font-size:16px;
+	font-weight:bold;
+	height:24px;
+	line-height:23px;
+	padding:0 0 0 33px;
+	margin:0 0 12px 0;
+	color:#63676C;
+}
+
+.feature p{
+	font-size:13px;
+	line-height:22px;
+	color:#7F7F7F;
+}
+.feature h4.feature-one{background:url(../img/icons/calculator.png) left center no-repeat;}
+.feature h4.feature-two{background:url(../img/icons/graph.png) left center no-repeat;}
+.feature h4.feature-three{background:url(../img/icons/piggy.png) left center no-repeat;}
+
+
+/*-----------------------------------------------------------------------------------*/
+/*	Footer CSS
+/*-----------------------------------------------------------------------------------*/
+
+#footer{
+	background:#2A2A2A;
+	min-height:120px;
+	padding:20px 0 0 0;
+	color:#6F6F6F;
+	line-height:24px;
+	text-align:center;
+	float:center;
+}
+
+#footer a{
+	color:#fff;
+	text-decoration:none;
+}
+
+#footer-left {
+    float:left;
+	text-align:left;
+	line-height:26px;
+}
+
+#footer-right{
+	float:right;
+	text-align:right;
+	line-height:26px;
+}
+
+#footer .social{
+	margin:0 0 0 20px;
+}
+
+.social{
+	padding-left:22px;
+	line-height:16px !important;
+	min-height:16px !important;
+}
+.social.facebook{background:url(../img/facebook.png) left center no-repeat;}
+.social.vimeo{background:url(../img/vimeo.png) left center no-repeat;}
+.social.nodejs { position: relative; top: -5px;}
