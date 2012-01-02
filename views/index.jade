@@ -1,11 +1,11 @@
-!!! t  body
-onal
+!!! XML
+!!!
 html(xmlns='http://www.w3.org/1999/xhtml')
   head
     meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
-    title PopBroker - Gerencie seus rendimentos
+    title PopBroker - Gerenciador de Rendimentos
     //
-       Include CSS 
+        Include CSS 
     link(href='css/reset.css', rel='stylesheet', type='text/css')
     link(href='css/style.css', rel='stylesheet', type='text/css')
     link(href='css/slimbox2.css', rel='stylesheet', type='text/css')
@@ -21,7 +21,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
     script(type='text/javascript', src='js/slimbox2.js')
     script(type='text/javascript', src='js/slides.min.js')
     script(type='text/javascript', src='js/custom.js')
-    link(rel='shortcut icon', href='img/favicon.ico', type='image/x-icon')
+    link(rel='shortcut icon', href='img/favico.ico', type='image/x-icon')
   body
     //
        START HEADER 
@@ -29,32 +29,28 @@ html(xmlns='http://www.w3.org/1999/xhtml')
       
               
     #head-break
-      #login-box
-        - if (messages)
-          ul#messages
-          - each message in messages
-            li(class="message") #{message}
+      .container
+        #head-break-left
+            h1
+              img(src='img/logo.png')
+              span
+                | PopBroker <br/>
+                small
+                  | Gerenciador de Rendimentos
+            h2 
+        #head-break-right
+            #login-box
+              - if (messages)
+                ul#messages
+                - each message in messages
+                  li(class="message") #{message}
 
-        form(action="/login/", method="POST")
-          table
-            tr
-              td.login-label Email:
-              td.login-label Senha:
-            tr
-              td
-                input(name="email")
-              td
-                input(name="password", type="password")
-              td
-                input(type="submit", value="Entrar")
-      h1
-        img(src='img/logo.png')
-        span(style='top: -10px; left: 15px; position: relative;') PopBroker
-      h2 Gerencie seus Rendimentos
-    //
-       END HEADER DIVIDER 
-    //
-       START MAIN CONTAINER 
+              form(action="/login/", method="POST")
+                div
+                  input#email.input-text("name="email", type="text", placeholder="e-mail")
+                  input.input-text(name="password", type="password", placeholder="senha")
+                  input.input-submit(type="submit", value="Entrar")
+        br.clear
     .container
       //
          START IMAC CONTAINER 
@@ -75,19 +71,14 @@ html(xmlns='http://www.w3.org/1999/xhtml')
       #right
         h2 Você sabe qual foi o seu rendimento ao longo dos meses?
         p
-          | O PopBroker veio para atender ao usuário domestico que precisa de ter um controle sobre
+          | O PopBroker veio para atender ao usuário doméstico que precisa de ter um controle sobre
           | os seus rendimentos. Não adianta você ter uma carteira forte e um bom capital de investimento
-          | se você não consegue saber através dos números o quanto efetivamente seu patrimonio
-          | aumentou. O PopBroker veio para ajudálo a saber o quanto cada investimento rendeu ao longo
+          | se você não consegue saber o quanto seu patrimônio valorizou.
+          | O PopBroker veio para ajudá-lo a calcular de uma maneira simples, correta e eficiente o rendimento de seus investimentos ao longo
           | dos meses!
         a#sub.appstore(href='#')
           span.appstore-hover
           | Registre-se
-        p
-          | Seu uso é simples e fácil, basta
-          a#sub(href='#') cadastrar o seu usuário
-          | e
-          | registrar mensalmente a posição da sua carteira.
       //
          END RIGHT CONTAINER 
       br.clear
@@ -106,9 +97,9 @@ html(xmlns='http://www.w3.org/1999/xhtml')
            ENAIL FORM 
         form(action="/signup/", method="POST")
           #footer-register-email
-            input#input-text(type='text', onfocus='if (this.value == \'digite seu e-mail aqui!\') {this.value = \'\';}', onblur='if (this.value == \'\') {this.value = \'digite seu e-mail aqui!\';}', value='digite seu e-mail aqui!', name="email")
+            input#input-text(type='text', placeholder='Digite seu e-mail aqui!', name="email")
           #footer-register-pass
-            input#input-text(type='password', onfocus='if (this.value == \'digite uma senha aqui!\') {this.value = \'\';}', onblur='if (this.value == \'\') {this.value = \'digite uma senha aqui!\';}', value='digite uma senha aqui!', name="password")
+            input#input-text(type='password', placeholder='digite uma senha aqui!', name="password")
           #footer-register
             input#submit.loginsubmit(type='submit', value='Enviar')
       //
@@ -179,8 +170,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
           a(href='#') Contact
           a.social.facebook(href='https://www.facebook.com/pages/Lethus-TI/111611328942839', target='_blank') Facebook
           a.social.vimeo(href='http://vimeo.com/user9774651', target='_blank') Vimeo
-          br
-          | Este projeto é apoiado pela Lethus TI.
+          br Este projeto é apoiado pela Lethus TI.
         br.clear
     //
        END footer CONTAINER 

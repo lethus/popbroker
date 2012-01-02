@@ -126,14 +126,69 @@ p{
 /*-----------------------------------------------------------------------------------*/
 
 #head-break{
-	height:125px;
+	height:80px;
 	width:100%;
 	background:url(../img/break_tile.png) top center repeat-x;
 	text-align:center;
 	margin:0 0 50px 0;
+	float:center;
+}
+
+#head-break-left {float: left; text-align: left; }
+#head-break-right {
+    float: right; 
+    margin: 10px 0 0 0; 
+    text-align: right;
 }
 
 #head-break img{ margin-top: 5px;}
+#head-break span { top: -35px; left: 8px; position: relative; }
+#head-break span small { left: 65px; position: relative; }
+
+#head-break input {
+    border-radius: 4px 4px 4px 4px;
+    float: left;
+    font-family: Helvetica,Arial,Verdana,sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+    vertical-align: middle;
+}
+
+#head-break .input-text {
+    background: -webkit-gradient(linear,left top,left bottom,color-stop(1,#706766),color-stop(0,#5A6C77));
+    background: -moz-linear-gradient(center bottom , #706766 0pt, #5A6C77 100%) repeat scroll 0 0 transparent;
+    border-color: #535E65;
+    border-style: solid;
+    border-width: 0 0 1px;
+    box-shadow: 0 1px 1px #000000 inset;
+    color: #A9B2B8;
+    height: 27px;
+    margin: 0 5px;
+    outline: medium none;
+    padding: 5px 7px 3px;
+    width: 96px;
+}
+
+#head-break .input-submit {
+    background: url("../img/login.btn.bg.png") repeat-x scroll center top #A8A8A8;
+    border: 1px solid #999999;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 1px 1px 8px #999999;
+    font-size: 13px;
+    font-weight: bold;
+    height: 27px;
+    text-shadow: 1px 1px 1px #CCCCCC;
+    width: 68px;
+}
+#head-break .input-submit:hover {
+    background: none repeat scroll 0 0 #999999;
+    cursor: pointer;
+}
+
+#head-break #email {
+    width: 150px;
+}
 
 #head-break p, #register p{
 	padding:30px 0 0 0;
@@ -218,15 +273,16 @@ p{
 .appstore, .appstore-hover{
 	display:block;
 	width:415px;
-	height:93px;
+	height:97px;
 	background:url(../img/appstore.png) center bottom no-repeat;
 	text-indent:-9999px;
 }
 
 .appstore-hover{
 	background-position:center top !important;
-	position:absolute;
-	top:-12;
+    position: absolute;
+    height: 94px;
+	top:0px;
 	left:0;
 }
 
@@ -288,7 +344,7 @@ p{
     border:none;
     font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
     font-size: 12px;
-    height: 25px;
+    height: 35px;
     line-height: 2.4em;
     padding: 5px 0 5px 10px;
     width: 245px;
@@ -296,8 +352,23 @@ p{
 	float: left;
 }
 
-#footer-register .loginsubmit {width: 98px; height:40px; border: 1px solid #999; background: #a8a8a8 url('../img/login.btn.bg.png') repeat-x top; font-size: 20px; padding: 8px 0; -moz-border-radius: 5px; border-radius: 5px; -webkit-border-radius: 5px; text-shadow: 1px 1px 1px #ccc; font-weight: 600; -moz-box-shadow: 1px 1px 8px #999; box-shadow: 1px 1px 8px #999; -webkit-box-shadow: 1px 1px 8px #999; margin-bottom: 15px}
-#footer-register .loginsubmit:hover {cursor: pointer; background: #999}
+#footer-register .loginsubmit {
+    background: url("../img/login.btn.bg.png") repeat-x scroll center top #A8A8A8;
+    border: 1px solid #999999;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 1px 1px 8px #999999;
+    font-size: 20px;
+    font-weight: 600;
+    height: 40px;
+    margin-bottom: 15px;
+    padding: 8px 0;
+    text-shadow: 1px 1px 1px #CCCCCC;
+    width: 98px;
+}
+#footer-register .loginsubmit:hover {
+    cursor: pointer; 
+    background: #999
+}
 
 
 /*-----------------------------------------------------------------------------------*/
