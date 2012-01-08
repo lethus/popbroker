@@ -157,7 +157,9 @@ p{
 
 #head-break .input-text {
     background: -webkit-gradient(linear,left top,left bottom,color-stop(1,#706766),color-stop(0,#5A6C77));
+    background: -o-linear-gradient(bottom, #706766 0pt, #5A6C77 100%);
     background: -moz-linear-gradient(center bottom , #706766 0pt, #5A6C77 100%) repeat scroll 0 0 transparent;
+    background: -ms-linear-gradient(center bottom , #706766 0pt, #5A6C77 100%) repeat scroll 0 0 transparent;
     border-color: #535E65;
     border-style: solid;
     border-width: 0 0 1px;
@@ -219,9 +221,9 @@ p{
 #head-break .reset-password {
     text-align: left;
     font-size: x-small;
-    margin: 0 0 0 7px;
-    position: relative;
-    top: 5px;
+    margin: 0 0 0 0px;
+    float: left;
+    top:-5px;
 }
 
 /*-----------------------------------------------------------------------------------*/

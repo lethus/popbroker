@@ -50,7 +50,8 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                   input#email.input-text("name="email", type="text", placeholder="e-mail", class="required")
                   input.input-text(name="password", type="password", placeholder="senha")
                   input.input-submit(type="submit", value="Entrar")
-                div.reset-password
+                br
+                span.reset-password
                   a(href='/reset-password')
                     | Esqueceu sua senha ?
         br.clear
@@ -163,8 +164,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
         #footer-right
           img.social.mongodb(src='img/mongodb-logo.png', alt='Mongo DB', title='Mongo DB')
           img.social.nodejs(src='img/nodejs-logo.png', alt='Node.js', title='NodeJS')
-        a(href='http://www.lethus.com.br')
-          img(src='img/logo.lethus.png', alt='Lethus TI', title='Lethus TI')
+        
         #footer-left
           a#top(href='#') Top
           | |
@@ -174,6 +174,8 @@ html(xmlns='http://www.w3.org/1999/xhtml')
           a.social.facebook(href='https://www.facebook.com/pages/Lethus-TI/111611328942839', target='_blank') Facebook
           a.social.vimeo(href='http://vimeo.com/user9774651', target='_blank') Vimeo
           br Este projeto é apoiado pela Lethus TI.
+        a(href='http://www.lethus.com.br')
+          img(src='img/logo.lethus.png', alt='Lethus TI', title='Lethus TI')
         br.clear
     //
        END footer CONTAINER 
