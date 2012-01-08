@@ -58,7 +58,7 @@ module.exports = function (app) {
                 req.session.messages = _.union(
                     req.session.messages||[],
                     req.form.errors);
-
+                    
                 res.redirect('back');
             }
 

@@ -216,6 +216,14 @@ p{
     color:#ffffff;
 }
 
+#head-break .reset-password {
+    text-align: left;
+    font-size: x-small;
+    margin: 0 0 0 7px;
+    position: relative;
+    top: 5px;
+}
+
 /*-----------------------------------------------------------------------------------*/
 /*	Center Half Content CSS
 /*-----------------------------------------------------------------------------------*/
@@ -444,6 +452,7 @@ p{
 	font-size:13px;
 	line-height:22px;
 	color:#7F7F7F;
+	text-align: justify;
 }
 .feature h4.feature-one{background:url(../img/icons/calculator.png) left center no-repeat;}
 .feature h4.feature-two{background:url(../img/icons/graph.png) left center no-repeat;}

@@ -44,12 +44,15 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                 ul#messages
                 - each message in messages
                   li(class="message") #{message}
-
+                                
               form(action="/login/", method="POST")
                 div
-                  input#email.input-text("name="email", type="text", placeholder="e-mail")
+                  input#email.input-text("name="email", type="text", placeholder="e-mail", class="required")
                   input.input-text(name="password", type="password", placeholder="senha")
                   input.input-submit(type="submit", value="Entrar")
+                div.reset-password
+                  a(href='/reset-password')
+                    | Esqueceu sua senha ?
         br.clear
     .container
       //
@@ -74,7 +77,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
           | O PopBroker veio para atender ao usuário doméstico que precisa de ter um controle sobre
           | os seus rendimentos. Não adianta você ter uma carteira forte e um bom capital de investimento
           | se você não consegue saber o quanto seu patrimônio valorizou.
-          | O PopBroker veio para ajudá-lo a calcular de uma maneira simples, correta e eficiente o rendimento de seus investimentos ao longo
+          | O PopBroker irá ajudá-lo a calcular de uma maneira simples, correta e eficiente o rendimento de seus investimentos ao longo
           | dos meses!
         a#sub.appstore(href='#')
           span.appstore-hover
@@ -129,9 +132,9 @@ html(xmlns='http://www.w3.org/1999/xhtml')
         .feature.left
           h4.feature-one Usamos o sistema de cotas
           p
-            | Para quem não conhece o sistema de cotas, este é o melhor método para acompanhar o rendimento de um portfólio de investimentos. Esse sistema é o recomendado pelo
-            a(href='http://www.ini.org.br/ini/site/home/', target='_blank') INI
-            | para o acompanhamento dos rendimentos. É o mesmo sistema utilizado pelos fundos de investimento.
+            | Para quem não conhece o sistema de cotas, este é o melhor método para acompanhar o rendimento de um portfólio de investimentos. Esse sistema é o recomendado pelo 
+            a(href='http://www.ini.org.br/ini/site/home/', target='_blank') Instituto Nacional de Investidores (INI) 
+            | para acompanhamento dos rendimentos. É o mesmo sistema utilizado pelos fundos de investimento.
         //
            END LEFT TILE 
         //
@@ -139,7 +142,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
         .feature.border
           h4.feature-two Gráficos e relatórios
           p
-            | No PopBroker você tem gráficos que lhe mostram os rendimentos mensais do seu portfólio de investimentos. Além disso você pode ver a evolução do seu patrimônio ao longo dos anos. Você tem uma análise gráfica de qual investimento lhe rendeu mais ao longo dos meses.
+            | No PopBroker você tem gráficos que mostram os rendimentos mensais do seu portfólio de investimentos. Além disso você poderá ver a evolução do seu patrimônio ao longo dos anos. Você terá uma análise gráfica de qual investimento rendeu mais ao longo dos meses.
         //
            END MIDDLE TILE 
         //
@@ -147,7 +150,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
         .feature.last
           h4.feature-three Ganhe mais
           p
-            | Saiba o ganho real considerando-se a inflação. Se você possui investimentos de diferentes categorias, seja ele em renda fixa, variável, ou misto pode controlá-los e saber como anda a evolução deles de forma individualizada.
+            | Saiba o ganho real considerando a inflação. Se você possui aplicações em diferentes categorias (renda fixa, variável ou ambas), poderá saber como anda a evolução da sua carteira de investimentos de forma conjunta.
         //
            END RIGHT TILE 
         br.clear
