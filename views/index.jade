@@ -9,6 +9,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
     link(href='css/reset.css', rel='stylesheet', type='text/css')
     link(href='css/style.css', rel='stylesheet', type='text/css')
     link(href='css/slimbox2.css', rel='stylesheet', type='text/css')
+    link(href='css/style.notification.css', rel='stylesheet', type='text/css')
     link(href='http://fonts.googleapis.com/css?family=Oswald|Droid+Sans:400,700', rel='stylesheet', type='text/css')
     //
        Include Scripts 
@@ -20,6 +21,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
     script(type='text/javascript', src='js/superfish.js')
     script(type='text/javascript', src='js/slimbox2.js')
     script(type='text/javascript', src='js/slides.min.js')
+    script(type='text/javascript', src='js/notification.js')
     script(type='text/javascript', src='js/custom.js')
     link(rel='shortcut icon', href='img/favico.ico', type='image/x-icon')
   body
@@ -40,14 +42,9 @@ html(xmlns='http://www.w3.org/1999/xhtml')
             h2 
         #head-break-right
             #login-box
-              - if (messages)
-                ul#messages
-                - each message in messages
-                  li(class="message") #{message}
-                                
               form(action="/login/", method="POST")
                 div
-                  input#email.input-text("name="email", type="text", placeholder="e-mail", class="required")
+                  input#email.input-text(name="email", type="text", placeholder="e-mail")
                   input.input-text(name="password", type="password", placeholder="senha")
                   input.input-submit(type="submit", value="Entrar")
                 br
@@ -55,6 +52,15 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                   a(href='/reset-password')
                     | Esqueceu sua senha ?
         br.clear
+    - if (messages)
+      div.notification.error(style='position:absolute; top: 65px; right: 300px')
+        span
+        div.text
+          p
+            strong 
+              | Foi encontrado os seguintes erros: <br/>
+            - each message in messages
+              li #{message}      
     .container
       //
          START IMAC CONTAINER 

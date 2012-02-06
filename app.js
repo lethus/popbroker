@@ -59,7 +59,7 @@ app.configure(function(){
 app.dynamicHelpers({
     messages: function(req){
         var msgs = req.session.messages;
-        req.session.messages = [];
+        req.session.messages = null;
         return msgs
     },
     user: function (req) {

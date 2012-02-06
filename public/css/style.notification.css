@@ -1,0 +1,323 @@
+/* -----------------------------------------------------------------------
+
+ NOTIFICATION BOXES v 3.0 - NO DESCRIPTION
+ http://evographics.net
+
+   * Copyright (c) 2010
+   * Created by Michele Ivani - EvoGraphics.
+
+----------------------------------------------------------------------- */
+
+/*NOTIFICATION BOX - NO DESCRIPTION */
+
+.notification {
+	min-height: 70px;
+	width: 400px;
+	display: block;
+	position: relative;
+	
+	/*Border Radius*/
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;	
+	
+	/*Box Shadow*/
+	-moz-box-shadow: 2px 2px 2px #cfcfcf;
+	-webkit-box-shadow: 2px 2px 4px #cfcfcf;
+	box-shadow: 2px 2px 2px #cfcfcf;
+	
+	margin-bottom: 30px;
+}
+
+.notification span {
+	background: url(../img/notification/close.png) no-repeat right top;
+	display: block;
+	width: 19px;
+	height: 19px;
+	position: absolute;
+	top:-9px;
+	right: -8px;
+}
+
+.notification .text {
+	overflow: hidden;
+	
+}
+
+.notification p {
+	width: 320px;	
+	font-family: Arial, Helvetica, sans-serif;
+	color: #7F7F7F;
+	font-size: 14px;
+	line-height: 21px;
+	text-align: justify;
+	float: right;
+	margin-right: 15px;
+	*margin-top: 15px; /*for lt IE8*/
+	
+	
+	/* TEXT SHADOW */
+	 text-shadow: 0px 0px 1px #f9f9f9;
+}
+
+.notification li { 
+    list-style-image: url(../img/notification/bullet-image.png);
+    padding-left:1em; 
+    text-indent:-1em;
+    list-style-position:inside;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	/* TEXT SHADOW */
+    text-shadow: 0px 0px 1px #777;
+}
+
+/*Auto Width Rules*/
+
+.autoWidth{
+	width: auto;	
+}
+
+.autoWidth p {
+	width: auto;
+	float: left;	
+}
+
+
+
+/*SUCCESS BOX*/
+
+.success {
+	border-top: 1px solid #edf7d0;
+	border-bottom: 1px solid #b7e789;
+	
+	/*Background Gradients*/
+	background: #dff3a8;
+	background: -moz-linear-gradient(top,#dff3a8,#c4fb92);
+	background: -webkit-gradient(linear, left top, left bottom, from(#dff3a8), to(#c4fb92));
+}
+
+.success:before {
+	content: url(../img/notification/success.png);
+	float: left;
+	margin: 23px 15px 0px 15px;
+}
+
+.success strong {
+	color: #61b316;
+	margin-right: 15px;
+}
+
+
+/*WARNING BOX*/
+
+.warning {
+	border-top: 1px solid #fefbcd;
+	border-bottom: 1px solid #e6e837;
+	
+	/*Background Gradients*/
+	background: #feffb1;
+	background: -moz-linear-gradient(top,#feffb1,#f0f17f);
+	background: -webkit-gradient(linear, left top, left bottom, from(#feffb1), to(#f0f17f));
+}
+
+.warning:before {
+	content: url(../img/notification/warning.png);
+	float: left;
+	margin: 15px 15px 0px 25px;
+}
+
+.warning strong {
+	color: #e5ac00;
+	margin-right: 15px;
+}
+
+
+/*QUICK TIP BOX*/
+
+.tip {
+	border-top: 1px solid #fbe4ae;
+	border-bottom: 1px solid #d9a87d;
+	
+	/*Background Gradients*/
+	background: #f9d9a1;
+	background: -moz-linear-gradient(top,#f9d9a1,#eabc7a);
+	background: -webkit-gradient(linear, left top, left bottom, from(#f9d9a1), to(#eabc7a));
+}
+
+.tip:before {
+	content: url(../img/notification/tip.png);
+	float: left;
+	margin: 20px 15px 0px 15px;
+}
+
+.tip strong {
+	color: #b26b17;
+	margin-right: 15px;
+}
+
+
+/*ERROR BOX*/
+
+.error {
+	border-top: 1px solid #f7d0d0;
+	border-bottom: 1px solid #c87676;
+	
+	/*Background Gradients*/
+	background: #f3c7c7;
+	background: -moz-linear-gradient(top,#f3c7c7,#eea2a2);
+	background: -webkit-gradient(linear, left top, left bottom, from(#f3c7c7), to(#eea2a2));
+}
+
+.error:before {
+	content: url(../img/notification/error.png);
+	float: left;
+	margin: 20px 15px 0px 15px;
+}
+
+.error strong {
+	color: #b31616;
+	margin-right: 15px;
+}
+
+
+/*SECURE AREA BOX*/
+
+.secure {
+	border-top: 1px solid #efe0fe;
+	border-bottom: 1px solid #d3bee9;
+	
+	/*Background Gradients*/
+	background: #e5cefe;
+	background: -moz-linear-gradient(top,#e5cefe,#e4bef9);
+	background: -webkit-gradient(linear, left top, left bottom, from(#e5cefe), to(#e4bef9));
+}
+
+.secure:before {
+	content: url(../img/notification/secure.png);
+	float: left;
+	margin: 18px 15px 0px 15px;
+}
+
+.secure strong {
+	color: #6417b2;
+	margin-right: 15px;
+}
+
+/*INFO BOX*/
+
+.info {
+	border-top: 1px solid #f3fbff;
+	border-bottom: 1px solid #bedae9;
+	
+	/*Background Gradients*/
+	background: #e0f4ff;
+	background: -moz-linear-gradient(top,#e0f4ff,#d4e6f0);
+	background: -webkit-gradient(linear, left top, left bottom, from(#e0f4ff), to(#d4e6f0));
+}
+
+.info:before {
+	content: url(../img/notification/info.png);
+	float: left;
+	margin: 18px 15px 0px 21px;
+}
+
+.info strong {
+	color: #177fb2;
+	margin-right: 15px;
+}
+
+/*MESSAGE BOX*/
+
+.message {
+	border-top: 1px solid #f4f4f4;
+	border-bottom: 1px solid #d7d7d7;
+	
+	/*Background Gradients*/
+	background: #f0f0f0;
+	background: -moz-linear-gradient(top,#f0f0f0,#e1e1e1);
+	background: -webkit-gradient(linear, left top, left bottom, from(#f0f0f0), to(#e1e1e1));
+}
+
+.message:before {
+	content: url(../img/notification/message.png);
+	float: left;
+	margin: 25px 15px 0px 15px;
+}
+
+.message strong {
+	color: #323232;
+	margin-right: 15px;
+}
+
+/*DONWLOAD BOX*/
+
+.download {
+	border-top: 1px solid #ffffff;
+	border-bottom: 1px solid #eeeeee;
+	
+	/*Background Gradients*/
+	background: #f7f7f7;
+	background: -moz-linear-gradient(top,#f7f7f7,#f0f0f0);
+	background: -webkit-gradient(linear, left top, left bottom, from(#f7f7f7), to(#f0f0f0));
+}
+
+.download:before {
+	content: url(../img/notification/download.png);
+	float: left;
+	margin: 16px 15px 0px 18px;
+}
+
+.download strong {
+	color: #037cda;
+	margin-right: 15px;
+}
+
+/*PURCHASE BOX*/
+
+.purchase {
+	border-top: 1px solid #d1f7f8;
+	border-bottom: 1px solid #8eabb1;
+	
+	/*Background Gradients*/
+	background: #c4e4e4;
+	background: -moz-linear-gradient(top,#c4e4e4,#97b8bf);
+	background: -webkit-gradient(linear, left top, left bottom, from(#c4e4e4), to(#97b8bf));
+}
+
+.purchase:before {
+	content: url(../img/notification/purchase.png);
+	float: left;
+	margin: 19px 15px 0px 15px;
+}
+
+.purchase strong {
+	color: #426065;
+	margin-right: 15px;
+}
+
+/*PRINT BOX*/
+
+.print {
+	border-top: 1px solid #dde9f3;
+	border-bottom: 1px solid #8fa6b2;
+	
+	/*Background Gradients*/
+	background: #cfdde8;
+	background: -moz-linear-gradient(top,#cfdde8,#9eb3bd);
+	background: -webkit-gradient(linear, left top, left bottom, from(#cfdde8), to(#9eb3bd));
+}
+
+.print:before {
+	content: url(../img/notification/print.png);
+	float: left;
+	margin: 19px 15px 0px 15px;
+}
+
+.print strong {
+	color: #3f4c6b;
+	margin-right: 15px;
+}
+
+
+
+

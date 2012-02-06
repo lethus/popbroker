@@ -28,7 +28,7 @@ var form = require("express-form"),
 var LoginForm = form(
     filter("email").trim(),
     validate("email")
-        .required(null, "Digite o Email")
+        .required(null, "Digite o e-mail")
         .isEmail("Email inválido"),
 
     filter("password").trim(),
