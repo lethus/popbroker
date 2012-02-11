@@ -47,6 +47,22 @@
 .notification p {
 	width: 320px;	
 	font-family: Arial, Helvetica, sans-serif;
+	color: #323232;
+	font-size: 14px;
+	line-height: 21px;
+	text-align: justify;
+	float: right;
+	margin-right: 15px;
+	*margin-top: 15px; /*for lt IE8*/
+	
+	
+	/* TEXT SHADOW */
+	 text-shadow: 0px 0px 1px #f9f9f9;
+}
+
+.notification.error p {
+	width: 320px;	
+	font-family: Arial, Helvetica, sans-serif;
 	color: #7F7F7F;
 	font-size: 14px;
 	line-height: 21px;

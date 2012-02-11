@@ -47,6 +47,14 @@ var SignupForm = form(
         .required(null, "Digite a senha")
 );
 
+var ResetPasswdForm = form(
+	filter("email").trim(),
+	validate("email")
+		.required(null, "Digite o seu e-mail")
+		.isEmail("E-mail inválido")
+);
+
 
 exports.LoginForm = LoginForm;
 exports.SignupForm = SignupForm;
+exports.ResetPasswdForm = ResetPasswdForm;

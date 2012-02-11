@@ -7,8 +7,17 @@ body{
 	font-size:12px;
 	font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	font-weight:normal;
+	height: 100%;
 }
 
+.tudo {
+    position: relative;
+    min-height:100%;
+}
+* html .tudo {
+	height: 100%; /* hack para IE6 que trata height como min-height */
+}
+	
 .container{
 	width:960px;
 	margin:0px auto;
@@ -417,6 +426,7 @@ p{
 
 #feature-tiles{
 	margin:20px 0px;
+	height: 350px;
 }
 
 .feature{
@@ -473,6 +483,9 @@ p{
 	line-height:24px;
 	text-align:center;
 	float:center;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
 }
 
 #footer a{
@@ -507,3 +520,61 @@ p{
 .login-label {color: white; }
 #login-box {display: block; width: 100%;}
 #login-box table {float: left;}
+
+
+
+
+.grid {
+    float: left;
+    margin-bottom: 40px;
+    margin-right: 40px;
+    text-align: left;
+}
+.grid.onehalf {
+    width: 460px;
+}
+.grid.onehalf p {font-size: 13px;}
+
+/*---------------------------------------------------------------*/
+/*	Public Forms
+/*---------------------------------------------------------------*/
+#public-form p{
+	margin:0 0 20px 0;
+	line-height:15px !important;
+}
+
+#public-form label{
+	display:block;
+	float:right;
+	margin:0;
+	padding:0;
+	width:190px;
+	text-align:left;
+	text-transform:uppercase;
+	font-weight:bold;
+	font-size:11px;
+	font-family:Arial, Helvetica, sans-serif;
+	color:#777777;
+}
+
+#public-form input{
+	display:block;
+	height:27px;
+	line-height:27px;
+	border:1px solid #cccccc;
+	padding:2px 8px;
+	-webkit-box-shadow: 0px 0px 5px 1px #dddddd;
+	-moz-box-shadow: 0px 0px 5px 1px #dddddd;
+	box-shadow: 0px 0px 5px 1px #dddddd;
+	width:230px;
+	color:#555555;
+	font-size:12px;
+	font-family:Arial, Helvetica, sans-serif;
+} 
+
+#public-form #submit{
+	padding:5px 8px !important;
+	width:auto !important;
+	height:auto !important;
+	cursor:pointer;
+}

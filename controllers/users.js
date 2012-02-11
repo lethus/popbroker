@@ -32,10 +32,6 @@ module.exports = function (app) {
         });
     });
 
-    app.get('/reset-password', function(req, res) {
-    	res.render('reset-password');
-    });
-    
     app.post(
         '/login/', forms.LoginForm,
         function(req, res) {
@@ -100,5 +96,25 @@ module.exports = function (app) {
                 res.redirect('back');
             }
         });
+        
+
+    app.get('/reset-password', function(req, res) {
+    	res.render('reset-password');
+    });
+    
+    app.post(
+    		'/reset-password', forms.ResetPasswdForm, 
+    		function(req, res) {
+    			if (req.form.isValid) {
+    				
+    			}
+    			else {
+    				req.session.messages = _.union(
+    					req.session.messages||[],
+    					req.form.errors);
+    					
+					res.redirect('back');
+    			}
+    });
 
 };

@@ -26,64 +26,67 @@ html(xmlns='http://www.w3.org/1999/xhtml')
       link(rel='shortcut icon', href='img/favico.ico', type='image/x-icon')
 
   body
-    //
-       START HEADER 
-    #header      
-    #head-break
-      .container
-        #head-break-left
-            h1
-              img(src='img/logo.png')
-              span
-                | PopBroker <br/>
-                small
-                  | Gerenciador de Rendimentos
-            h2 
-        #head-break-right
-            #login-box
-              form(action="/login/", method="POST")
-                div
-                  input#email.input-text(name="email", type="text", placeholder="e-mail")
-                  input.input-text(name="password", type="password", placeholder="senha")
-                  input.input-submit(type="submit", value="Entrar")
-                br
-                span.reset-password
-                  a(href='/reset-password')
-                    | Esqueceu sua senha ?
-        br.clear
-    - if (messages)
-      div.notification.error(style='position:absolute; top: 65px; right: 300px')
-        span
-        div.text
-          p
-            strong 
-              | Error: <br/>
-            - each message in messages
-              li #{message}       
-    
-    
-    block content
-  
-    block foot
-      //
-         START footer CONTAINER 
-      #footer
-        .container
-          #footer-right
-            img.social.mongodb(src='img/mongodb-logo.png', alt='Mongo DB', title='Mongo DB')
-            img.social.nodejs(src='img/nodejs-logo.png', alt='Node.js', title='NodeJS')
-          
-          #footer-left
-            a#top(href='#') Top
-            | |
-            a(href='#') Suporte 
-            | |
-            a(href='#') Contact
-            a.social.facebook(href='https://www.facebook.com/pages/Lethus-TI/111611328942839', target='_blank') Facebook
-            a.social.vimeo(href='http://vimeo.com/user9774651', target='_blank') Vimeo
-            br Este projeto é apoiado pela Lethus TI.
-          a(href='http://www.lethus.com.br')
-            img(src='img/logo.lethus.png', alt='Lethus TI', title='Lethus TI')
-          br.clear
-      //
-         END footer CONTAINER 
+    .tudo
+      .conteudo
+        //
+           START HEADER 
+        #header      
+        #head-break
+          .container
+            #head-break-left
+                h1
+                  a(href='/')
+                    img(src='img/logo.png')
+                  span
+                    | PopBroker <br/>
+                    small
+                      | Gerenciador de Rendimentos
+                h2 
+            #head-break-right
+                #login-box
+                  form(action="/login/", method="POST")
+                    div
+                      input#email.input-text(name="email", type="text", placeholder="e-mail")
+                      input.input-text(name="password", type="password", placeholder="senha")
+                      input.input-submit(type="submit", value="Entrar")
+                    br
+                    span.reset-password
+                      a(href='/reset-password')
+                        | Esqueceu sua senha ?
+            br.clear
+        - if (messages)
+          div.notification.error(style='position:absolute; top: 65px; right: 300px')
+            span
+            div.text
+              p
+                strong 
+                  | Error: <br/>
+                - each message in messages
+                  li #{message}       
+        
+        
+        block content
+
+      block foot
+        //
+           START footer CONTAINER 
+        #footer
+          .container
+            #footer-right
+              img.social.mongodb(src='img/mongodb-logo.png', alt='Mongo DB', title='Mongo DB')
+              img.social.nodejs(src='img/nodejs-logo.png', alt='Node.js', title='NodeJS')
+            
+            #footer-left
+              a#top(href='#') Top
+              | |
+              a(href='#') Suporte 
+              | |
+              a(href='#') Contact
+              a.social.facebook(href='https://www.facebook.com/pages/Lethus-TI/111611328942839', target='_blank') Facebook
+              a.social.vimeo(href='http://vimeo.com/user9774651', target='_blank') Vimeo
+              br Este projeto é apoiado pela Lethus TI.
+            a(href='http://www.lethus.com.br')
+              img(src='img/logo.lethus.png', alt='Lethus TI', title='Lethus TI')
+            br.clear
+        //
+           END footer CONTAINER 
