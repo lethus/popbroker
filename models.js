@@ -56,7 +56,7 @@ UserSchema.path('email').validate(function (v, fn) {
         if (err) fn(false);
         fn(val==0);
     });
-}, 'Email duplicado'); 
+}, 'Email duplicado!'); 
 
 UserSchema.statics.authenticate = function (email, password, fn) {
     this.findOne({email: email}, function (err, user) {

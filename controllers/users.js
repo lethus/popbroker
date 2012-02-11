@@ -32,6 +32,9 @@ module.exports = function (app) {
         });
     });
 
+    app.get('/reset-password', function(req, res) {
+    	res.render('reset-password');
+    });
     
     app.post(
         '/login/', forms.LoginForm,
@@ -77,6 +80,14 @@ module.exports = function (app) {
                                 res.redirect('/home/');
                             });
                         } else {
+                        	if (!req.session.messages)
+                                req.session.messages = [];
+                            
+                            if (err.errors.email) {
+		                        req.session.messages.push(
+		                        	err.errors.email.type
+		                        );
+	                        }	                        
                             res.redirect('back');
                         }
                     });

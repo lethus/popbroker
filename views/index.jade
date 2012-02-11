@@ -1,187 +1,105 @@
-!!! XML
-!!!
-html(xmlns='http://www.w3.org/1999/xhtml')
-  head
-    meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
-    title PopBroker - Gerenciador de Rendimentos
+extends public-main-layout
+
+block content
+  .container
     //
-        Include CSS 
-    link(href='css/reset.css', rel='stylesheet', type='text/css')
-    link(href='css/style.css', rel='stylesheet', type='text/css')
-    link(href='css/slimbox2.css', rel='stylesheet', type='text/css')
-    link(href='css/style.notification.css', rel='stylesheet', type='text/css')
-    link(href='http://fonts.googleapis.com/css?family=Oswald|Droid+Sans:400,700', rel='stylesheet', type='text/css')
+       START IMAC CONTAINER 
+    #left
+      //
+         SLIDE SHOW 
+      ul#slides
+        li
+          img(src='img/screens/screen2.png', alt='Account screen', border='0')
+        li
+          img(src='img/screens/screen3.png', alt='Account screen', border='0')
+        li
+          img(src='img/screens/screen4.png', alt='Account screen', border='0')
     //
-       Include Scripts 
-    script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js')
-    script(type='text/javascript', src='js/jquery.cycle.lite.min.js')
-    script(type='text/javascript', src='js/jquery.pngFix.pack.js')
-    script(type='text/javascript', src='js/jquery.color.js')
-    script(type='text/javascript', src='js/hoverIntent.js')
-    script(type='text/javascript', src='js/superfish.js')
-    script(type='text/javascript', src='js/slimbox2.js')
-    script(type='text/javascript', src='js/slides.min.js')
-    script(type='text/javascript', src='js/notification.js')
-    script(type='text/javascript', src='js/custom.js')
-    link(rel='shortcut icon', href='img/favico.ico', type='image/x-icon')
-  body
+       END IMAC CONTAINER 
     //
-       START HEADER 
-    #header
-      
-              
-    #head-break
-      .container
-        #head-break-left
-            h1
-              img(src='img/logo.png')
-              span
-                | PopBroker <br/>
-                small
-                  | Gerenciador de Rendimentos
-            h2 
-        #head-break-right
-            #login-box
-              form(action="/login/", method="POST")
-                div
-                  input#email.input-text(name="email", type="text", placeholder="e-mail")
-                  input.input-text(name="password", type="password", placeholder="senha")
-                  input.input-submit(type="submit", value="Entrar")
-                br
-                span.reset-password
-                  a(href='/reset-password')
-                    | Esqueceu sua senha ?
-        br.clear
-    - if (messages)
-      div.notification.error(style='position:absolute; top: 65px; right: 300px')
-        span
-        div.text
-          p
-            strong 
-              | Foi encontrado os seguintes erros: <br/>
-            - each message in messages
-              li #{message}      
+       START RIGHT CONTAINER 
+    #right
+      h2 Você sabe qual foi o seu rendimento ao longo dos meses?
+      p
+        | O PopBroker veio para atender ao usuário doméstico que precisa de ter um controle sobre
+        | os seus rendimentos. Não adianta você ter uma carteira forte e um bom capital de investimento
+        | se você não consegue saber o quanto seu patrimônio valorizou.
+        | O PopBroker irá ajudá-lo a calcular de uma maneira simples, correta e eficiente o rendimento de seus investimentos ao longo
+        | dos meses!
+      a#sub.appstore(href='#')
+        span.appstore-hover
+        | Registre-se
+    //
+       END RIGHT CONTAINER 
+    br.clear
+  //
+     END MAIN CONTAINER 
+  //
+     START register CONTAINER 
+  #register
+    //
+       CLOSE BUTTON 
+    img#close(src='img/close.png', border='0', alt='Close')
+    .container
+      h1(style='padding: 10px 0 0;') Totalmente Seguro !!!
+      p(style='padding: 5px 0 0;') Não solicitamos nenhuma informação pessoal para cadastro no sistema
+      //
+         ENAIL FORM 
+      form(action="/signup/", method="POST")
+        #footer-register-email
+          input#input-text(type='text', placeholder='Digite seu e-mail aqui!', name="email")
+        #footer-register-pass
+          input#input-text(type='password', placeholder='digite uma senha aqui!', name="password")
+        #footer-register
+          input#submit.loginsubmit(type='submit', value='Enviar')
+    //
+       END EMAIL FORM 
+  //
+     END register CONTAINER 
+  //
+     START image-tiles CONTAINER 
+  #image-tiles
+    .container
+      a(rel='lightbox-shots', title='App Screen Shot One', href='img/screens/full_one.jpg')
+        img(alt='screenshot one', src='img/screens/full_one.png', style='background-color: rgb(255, 255, 255);')
+      a(rel='lightbox-shots', title='App Screen Shot Two', href='img/screens/full_two.jpg')
+        img(alt='screenshot two', src='img/screens/full_two.png')
+      a(rel='lightbox-shots', title='Screen Shot Three', href='img/screens/full_three.jpg')
+        img(alt='screenshot three', src='img/screens/full_three.png', style='background-color: rgb(255, 255, 255);')
+      a(rel='lightbox-shots', title='Screen Shot Four', href='img/screens/full_four.jpg')
+        img.last(alt='screenshot four', src='img/screens/full_four.png')
+  //
+     END image-tiles CONTAINER 
+  //
+     START features-tiles CONTAINER 
+  #feature-tiles
     .container
       //
-         START IMAC CONTAINER 
-      #left
-        //
-           SLIDE SHOW 
-        ul#slides
-          li
-            img(src='img/screens/screen2.png', alt='Account screen', border='0')
-          li
-            img(src='img/screens/screen3.png', alt='Account screen', border='0')
-          li
-            img(src='img/screens/screen4.png', alt='Account screen', border='0')
-      //
-         END IMAC CONTAINER 
-      //
-         START RIGHT CONTAINER 
-      #right
-        h2 Você sabe qual foi o seu rendimento ao longo dos meses?
+         LEFT TILE 
+      .feature.left
+        h4.feature-one Usamos o sistema de cotas
         p
-          | O PopBroker veio para atender ao usuário doméstico que precisa de ter um controle sobre
-          | os seus rendimentos. Não adianta você ter uma carteira forte e um bom capital de investimento
-          | se você não consegue saber o quanto seu patrimônio valorizou.
-          | O PopBroker irá ajudá-lo a calcular de uma maneira simples, correta e eficiente o rendimento de seus investimentos ao longo
-          | dos meses!
-        a#sub.appstore(href='#')
-          span.appstore-hover
-          | Registre-se
+          | Para quem não conhece o sistema de cotas, este é o melhor método para acompanhar o rendimento de um portfólio de investimentos. Esse sistema é o recomendado pelo 
+          a(href='http://www.ini.org.br/ini/site/home/', target='_blank') Instituto Nacional de Investidores (INI) 
+          | para acompanhamento dos rendimentos. É o mesmo sistema utilizado pelos fundos de investimento.
       //
-         END RIGHT CONTAINER 
+         END LEFT TILE 
+      //
+         MIDDLE TILE 
+      .feature.border
+        h4.feature-two Gráficos e relatórios
+        p
+          | No PopBroker você tem gráficos que mostram os rendimentos mensais do seu portfólio de investimentos. Além disso você poderá ver a evolução do seu patrimônio ao longo dos anos. Você terá uma análise gráfica de qual investimento rendeu mais ao longo dos meses.
+      //
+         END MIDDLE TILE 
+      //
+         RIGHT TILE 
+      .feature.last
+        h4.feature-three Ganhe mais
+        p
+          | Saiba o ganho real considerando a inflação. Se você possui aplicações em diferentes categorias (renda fixa, variável ou ambas), poderá saber como anda a evolução da sua carteira de investimentos de forma conjunta.
+      //
+         END RIGHT TILE 
       br.clear
-    //
-       END MAIN CONTAINER 
-    //
-       START register CONTAINER 
-    #register
-      //
-         CLOSE BUTTON 
-      img#close(src='img/close.png', border='0', alt='Close')
-      .container
-        h1(style='padding: 10px 0 0;') Totalmente Seguro !!!
-        p(style='padding: 5px 0 0;') Não solicitamos nenhuma informação pessoal para cadastro no sistema
-        //
-           ENAIL FORM 
-        form(action="/signup/", method="POST")
-          #footer-register-email
-            input#input-text(type='text', placeholder='Digite seu e-mail aqui!', name="email")
-          #footer-register-pass
-            input#input-text(type='password', placeholder='digite uma senha aqui!', name="password")
-          #footer-register
-            input#submit.loginsubmit(type='submit', value='Enviar')
-      //
-         END EMAIL FORM 
-    //
-       END register CONTAINER 
-    //
-       START image-tiles CONTAINER 
-    #image-tiles
-      .container
-        a(rel='lightbox-shots', title='App Screen Shot One', href='img/screens/full_one.jpg')
-          img(alt='screenshot one', src='img/screens/full_one.png', style='background-color: rgb(255, 255, 255);')
-        a(rel='lightbox-shots', title='App Screen Shot Two', href='img/screens/full_two.jpg')
-          img(alt='screenshot two', src='img/screens/full_two.png')
-        a(rel='lightbox-shots', title='Screen Shot Three', href='img/screens/full_three.jpg')
-          img(alt='screenshot three', src='img/screens/full_three.png', style='background-color: rgb(255, 255, 255);')
-        a(rel='lightbox-shots', title='Screen Shot Four', href='img/screens/full_four.jpg')
-          img.last(alt='screenshot four', src='img/screens/full_four.png')
-    //
-       END image-tiles CONTAINER 
-    //
-       START features-tiles CONTAINER 
-    #feature-tiles
-      .container
-        //
-           LEFT TILE 
-        .feature.left
-          h4.feature-one Usamos o sistema de cotas
-          p
-            | Para quem não conhece o sistema de cotas, este é o melhor método para acompanhar o rendimento de um portfólio de investimentos. Esse sistema é o recomendado pelo 
-            a(href='http://www.ini.org.br/ini/site/home/', target='_blank') Instituto Nacional de Investidores (INI) 
-            | para acompanhamento dos rendimentos. É o mesmo sistema utilizado pelos fundos de investimento.
-        //
-           END LEFT TILE 
-        //
-           MIDDLE TILE 
-        .feature.border
-          h4.feature-two Gráficos e relatórios
-          p
-            | No PopBroker você tem gráficos que mostram os rendimentos mensais do seu portfólio de investimentos. Além disso você poderá ver a evolução do seu patrimônio ao longo dos anos. Você terá uma análise gráfica de qual investimento rendeu mais ao longo dos meses.
-        //
-           END MIDDLE TILE 
-        //
-           RIGHT TILE 
-        .feature.last
-          h4.feature-three Ganhe mais
-          p
-            | Saiba o ganho real considerando a inflação. Se você possui aplicações em diferentes categorias (renda fixa, variável ou ambas), poderá saber como anda a evolução da sua carteira de investimentos de forma conjunta.
-        //
-           END RIGHT TILE 
-        br.clear
-    //
-       END features-tiles CONTAINER 
-    //
-       START footer CONTAINER 
-    #footer
-      .container
-        #footer-right
-          img.social.mongodb(src='img/mongodb-logo.png', alt='Mongo DB', title='Mongo DB')
-          img.social.nodejs(src='img/nodejs-logo.png', alt='Node.js', title='NodeJS')
-        
-        #footer-left
-          a#top(href='#') Top
-          | |
-          a(href='#') Suporte 
-          | |
-          a(href='#') Contact
-          a.social.facebook(href='https://www.facebook.com/pages/Lethus-TI/111611328942839', target='_blank') Facebook
-          a.social.vimeo(href='http://vimeo.com/user9774651', target='_blank') Vimeo
-          br Este projeto é apoiado pela Lethus TI.
-        a(href='http://www.lethus.com.br')
-          img(src='img/logo.lethus.png', alt='Lethus TI', title='Lethus TI')
-        br.clear
-    //
-       END footer CONTAINER 
+  //
+     END features-tiles CONTAINER 
