@@ -6,6 +6,7 @@
       "express": "latest"
     , "jade": "latest"
     , "mongoose": "latest"
+    , "mail": "latest"
     , "mongoose-types": "latest"
     , "express-form": "latest"
     , "underscore": "latest"

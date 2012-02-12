@@ -1,2 +1,5 @@
 # modules
 [Nn]ode_modules/
+
+#arquivo de configuração de envio de email e banco
+configLocal.js

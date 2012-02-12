@@ -61,7 +61,7 @@ UserSchema.path('email').validate(function (v, fn) {
 UserSchema.statics.authenticate = function (email, password, fn) {
     this.findOne({email: email}, function (err, user) {
         if (!user) return fn(new Error('cannot find user'));
-        if (user.password == hash(password, 'lethus123')) return fn(null, user);
+        if (user.password == hash(password, conf.secret)) return fn(null, user);
         // Otherwise password is invalid
         fn(new Error('invalid password'));
     });
@@ -70,7 +70,7 @@ UserSchema.statics.authenticate = function (email, password, fn) {
 UserSchema.statics.newUser = function (email, password, fn) {
     var instance = new User();
     instance.email = email;
-    instance.password = hash(password, 'lethus123');
+    instance.password = hash(password, conf.secret);
 
     instance.save(function (err) {
         fn(err, instance);

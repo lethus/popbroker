@@ -23,13 +23,18 @@ var express = require('express');
 var MongoStore = require('connect-mongo'),
     mongo = require('mongoose');
 
-var conf = {
-  db: {
-    db: 'popbroker',
-    host: 'localhost',
-  },
-  secret: 'lethus123'
-};
+var path = require('path');
+if (path.existsSync('./configLocal.js')) {
+	var configLocal = require('./configLocal.js');
+	
+	mail = require('mail').Mail(
+		configLocal.getMailConfig());
+	conf = configLocal.getSiteConfig();
+}
+else {
+  log.error('Por favor copie o arquivo configDefault.js para configLocal.js e substitua os valores padrões.');
+}
+
 
 var app = module.exports = express.createServer(
     express.bodyParser()
