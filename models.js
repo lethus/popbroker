@@ -77,6 +77,26 @@ UserSchema.statics.newUser = function (email, password, fn) {
     });
 };
 
+UserSchema.statics.resetPassword = function(userId, callback) {
+	var newPassword = '';
+	newPassword = newPassword.randomString(6);
+  	var cripto = hash(newPassword, conf.secret);
+  	var data = {} 
+  		data.password = cripto;
+  	
+  	this.update({_id: userId}
+  		, {$set: data}
+  		, {multi:false,safe:true}
+  		, function( error, docs ) {
+  			if (error) {
+  				callback(error);
+  			}
+  			else {
+  				callback(null, newPassword);
+  			}
+  		});
+}
+
 User = mongoose.model('User', UserSchema);
 
 exports.User = User;

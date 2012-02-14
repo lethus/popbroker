@@ -20,10 +20,12 @@
  */
 
 var utils = require('./utils.js');
+var UserHelper = require('./controllers/users.js');
 
 module.exports = function(app){
-    require('./controllers/users.js')(app);
     app.get('/', function(req, res){
         res.render('index', {title:"Página inicial"});
     });
+    
+    UserHelper.add_routes(app);
 };

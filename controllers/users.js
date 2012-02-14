@@ -25,7 +25,7 @@ var forms = require('../forms.js');
 var utils = require('../utils.js');
 var User = models.User;
 
-module.exports = function (app) {
+exports.add_routes = function (app) {
     app.get('/logout/', function(req, res){
         req.session.destroy(function(){
             res.redirect('/');
@@ -99,7 +99,7 @@ module.exports = function (app) {
         
 
     app.get('/forgot-password', function(req, res) {
-    	res.render('forgot-password');
+    	res.render('users/forgot-password');
     });
     
     app.post(
@@ -125,19 +125,50 @@ module.exports = function (app) {
     									res.redirect('back');
     								}
     							});
+							
+							req.session.messages = ['E-mail enviado com sucesso. Go verifique sua inbox!'];
+							res.redirect('back');
     					}
     					else {
-    						req.session.messages = ["E-mail não encontrado na lista de usuários!"];
+    						req.session.messages = {errors: ["E-mail não encontrado na lista de usuários!"]};
     						res.redirect('back');
     					}
     				});
     			}
     			else {
-    				req.session.messages = _.union(
-    					req.session.messages||[],
-    					req.form.errors);
+    				req.session.messages = {'errors': req.form.errors};
 					res.redirect('back');
     			}
+    });
+    
+    app.get('/reset-password', function(req, res, next) {
+    	var userId = req.query.userId;
+    	var verify = decodeURIComponent(req.query.verify);
+    	var password = '';
+    	if (userId && verify) {
+    		User.findOne({_id: userId}, function (error, user) {
+    			if (user && user.password == verify) {
+    				User.resetPassword(userId, function (error, result) {
+    					if (error) {
+    						req.session.messages = ['Não foi possível resetar a senha'];
+    						res.render('users/reset-password');
+    					}
+    					else {
+    						password = result;
+    						res.render('users/reset-password', {password: password});
+    					}
+    				});
+    			}
+    			else {
+    				req.session.messages = ['Não foi possivel encontrar o usuário ou o link para resetar a senha expirou']
+    				res.render('users/reset-password');
+    			}
+    		});
+    	}
+		else {
+    		req.session.messages = ['Este link expirou, a senha não pode ser resetada'];
+    		res.render('users/reset-password');
+    	}
     });
 
 };
