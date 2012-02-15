@@ -1,0 +1,47 @@
+extends ../private-main-layout
+
+block content
+  div.container
+    h1 Home do usuário
+
+
+    form#public-form(method="POST") 
+      p Ano:
+        select(name='year')
+          option(value='2010') 2010
+          option(value='2011') 2011
+          option(value='2012') 2012
+      p Mês:
+        select(name='month')
+          option(value="1") Janeiro
+          option(value="2") Fevereiro
+          option(value="3") Março
+          option(value="4") Abril
+          option(value="5") Maio
+          option(value="6") Junho
+          option(value="7") Julho
+          option(value="8") Agosto
+          option(value="9") Setembro
+          option(value="10") Outubro
+          option(value="11") Novembro
+          option(value="12") Dezembro
+      p Tipo investimento: 
+        select(name='type')
+          option(value='cp') Cardeneta de Poupança
+          option(value='tp') Títulos Públicos Federais
+          option(value='db') Debêntures
+          option(value='cd') CDB e RDB
+          option(value='fr') Fundo de renda fixa
+          option(value='fa') Fundo de investimentos em ações
+          option(value='ac') Ações
+          option(value='dr') Derivativos
+          option(value='ou') Ouro
+          option(value='me') Moeda estrangeira
+          option(value='fi') Fundos imobiliários
+          option(value='im') Imóveis
+      p Carteira: 
+        input#input-text(name='wallet')
+      p Aporte: 
+        input#input-text(name='inflow')
+      p
+        input#submit(type='submit', value='Salvar')

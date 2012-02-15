@@ -45,17 +45,17 @@ exports.add_routes = function (app) {
                                 res.redirect('/home/');
                             });
                         } else {
-                            if (!req.session.messages)
-                                req.session.messages = [];
+                            if (!req.session.errors)
+                                req.session.errors = [];
                         
-                            req.session.messages.push(
+                            req.session.errors.push(
                                 'Autenticação falhou, verifique seu usuário e senha');
                             res.redirect('back');
                         }
                     });         
             } else {
-                req.session.messages = _.union(
-                    req.session.messages||[],
+                req.session.errors = _.union(
+                    req.session.errors||[],
                     req.form.errors);
                 
                 res.redirect('back');
@@ -76,23 +76,18 @@ exports.add_routes = function (app) {
                                 res.redirect('/home/');
                             });
                         } else {
-                        	if (!req.session.messages)
-                                req.session.messages = [];
-                            
                             if (err.errors.email) {
-		                        req.session.messages.push(
-		                        	err.errors.email.type
-		                        );
+		                        req.session.errors.push(
+		                        	err.errors.email.type);
 	                        }	                        
                             res.redirect('back');
                         }
                     });
 
             } else {
-                req.session.messages = _.union(
-                    req.session.messages||[],
-                    req.form.errors);
-
+                req.session.errors = _.union(
+		                req.session.errors||[],
+		                req.form.errors);
                 res.redirect('back');
             }
         });
@@ -121,22 +116,27 @@ exports.add_routes = function (app) {
     						}).body(resetMessage)
 								.send(function(err) {
     								if (err) {
-    									req.session.messages = [err.toString()];
+    									req.session.errors.push(
+    										err.toString());
     									res.redirect('back');
     								}
     							});
 							
-							req.session.messages = ['E-mail enviado com sucesso. Go verifique sua inbox!'];
+							req.session.messages.push(
+								'E-mail enviado com sucesso. Go verifique sua inbox!');
 							res.redirect('back');
     					}
     					else {
-    						req.session.messages = {errors: ["E-mail não encontrado na lista de usuários!"]};
+    						req.session.errors.push(
+    							"E-mail não encontrado na lista de usuários!");
     						res.redirect('back');
     					}
     				});
     			}
     			else {
-    				req.session.messages = {'errors': req.form.errors};
+    				req.session.errors = _.union(
+		                req.session.errors||[],
+		                req.form.errors);
 					res.redirect('back');
     			}
     });
@@ -150,7 +150,8 @@ exports.add_routes = function (app) {
     			if (user && user.password == verify) {
     				User.resetPassword(userId, function (error, result) {
     					if (error) {
-    						req.session.messages = ['Não foi possível resetar a senha'];
+    						req.session.errors.push(
+    							'Não foi possível resetar a senha');
     						res.render('users/reset-password');
     					}
     					else {
@@ -160,15 +161,16 @@ exports.add_routes = function (app) {
     				});
     			}
     			else {
-    				req.session.messages = ['Não foi possivel encontrar o usuário ou o link para resetar a senha expirou']
+    				req.session.errors.push(
+    					'Não foi possivel encontrar o usuário ou o link para resetar a senha expirou');
     				res.render('users/reset-password');
     			}
     		});
     	}
 		else {
-    		req.session.messages = ['Este link expirou, a senha não pode ser resetada'];
+    		req.session.errors.push(
+    			'Este link expirou, a senha não pode ser resetada');
     		res.render('users/reset-password');
     	}
     });
-
 };

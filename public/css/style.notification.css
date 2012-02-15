@@ -14,7 +14,10 @@
 	min-height: 70px;
 	width: 400px;
 	display: block;
-	position: relative;
+	position: absolute;
+	left: 50%;
+	margin-left: -200px;
+	top: 65px;
 	
 	/*Border Radius*/
 	border-radius: 5px;
@@ -41,7 +44,7 @@
 
 .notification .text {
 	overflow: hidden;
-	
+	margin: 3px 0;
 }
 
 .notification p {

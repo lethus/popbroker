@@ -1,0 +1,76 @@
+!!! XML
+html(xmlns='http://www.w3.org/1999/xhtml')
+  head
+    block head
+      meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
+      title PopBroker - Gerenciador de Rendimentos
+      //
+          Include CSS 
+      link(href='/css/reset.css', rel='stylesheet', type='text/css')
+      link(href='/css/style.css', rel='stylesheet', type='text/css')
+      link(href='/css/slimbox2.css', rel='stylesheet', type='text/css')
+      link(href='/css/style.notification.css', rel='stylesheet', type='text/css')
+      link(href='http://fonts.googleapis.com/css?family=Oswald|Droid+Sans:400,700', rel='stylesheet', type='text/css')
+      //
+         Include Scripts 
+      script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js')
+      script(type='text/javascript', src='/js/jquery.cycle.lite.min.js')
+      script(type='text/javascript', src='/js/jquery.pngFix.pack.js')
+      script(type='text/javascript', src='/js/jquery.color.js')
+      script(type='text/javascript', src='/js/hoverIntent.js')
+      script(type='text/javascript', src='/js/superfish.js')
+      script(type='text/javascript', src='/js/slimbox2.js')
+      script(type='text/javascript', src='/js/slides.min.js')
+      script(type='text/javascript', src='/js/notification.js')
+      script(type='text/javascript', src='/js/custom.js')
+      link(rel='shortcut icon', href='/img/favico.ico', type='image/x-icon')
+
+  body
+    .tudo
+      .conteudo
+        //
+           START HEADER 
+        #header      
+        #head-break
+          .container
+            #head-break-left
+                h1
+                  a(href='/')
+                    img(src='/img/logo.png')
+                  span
+                    | PopBroker <br/>
+                    small
+                      | Gerenciador de Rendimentos
+                h2 
+            #head-break-right
+                
+            br.clear
+        include includes/messages
+        
+        
+        block content
+
+      block foot
+        div.clear
+        //
+           START footer CONTAINER 
+        #footer
+          .container
+            #footer-right
+              img.social.mongodb(src='/img/mongodb-logo.png', alt='Mongo DB', title='Mongo DB')
+              img.social.nodejs(src='/img/nodejs-logo.png', alt='Node.js', title='NodeJS')
+            
+            #footer-left
+              a#top(href='#') Top
+              | |
+              a(href='#') Suporte 
+              | |
+              a(href='#') Contact
+              a.social.facebook(href='https://www.facebook.com/pages/Lethus-TI/111611328942839', target='_blank') Facebook
+              a.social.vimeo(href='http://vimeo.com/user9774651', target='_blank') Vimeo
+              br Este projeto é apoiado pela Lethus TI.
+            a(href='http://www.lethus.com.br')
+              img(src='/img/logo.lethus.png', alt='Lethus TI', title='Lethus TI')
+            br.clear
+        //
+           END footer CONTAINER 

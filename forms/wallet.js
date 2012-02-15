@@ -18,16 +18,20 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+var model = require("../models/wallet.js");
 
-var utils = require('./utils.js');
-var UserHelper = require('./controllers/users.js');
-var WalletHelper = require('./controllers/wallet.js');
+var form = require("express-form"),
+	filter = form.filter,
+	validate = form.validate;
+	
+var addWalletForm = form(
+	filter("ano").trim(),
+	validate("ano")
+		.required(null, "Escolha um ano"),
+		
+	filter("mes").trim(),
+	validate("mes")
+		.required(null, "Escolha um mês")
+);
 
-module.exports = function(app){
-    app.get('/', function(req, res){
-        res.render('index', {title:"Página inicial"});
-    });
-    
-    UserHelper.add_routes(app);
-    WalletHelper.add_routes(app);
-};
+exports.addWalletForm = addWalletForm;

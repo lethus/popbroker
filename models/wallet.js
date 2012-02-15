@@ -18,16 +18,30 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+var mongoose = require('mongoose')
+	, mongoTypes = require('mongoose-types');
 
-var utils = require('./utils.js');
-var UserHelper = require('./controllers/users.js');
-var WalletHelper = require('./controllers/wallet.js');
+mongoTypes.loadTypes(mongoose, 'email');
+mongoose.connect('mongodb://localhost/popbroker');
 
-module.exports = function(app){
-    app.get('/', function(req, res){
-        res.render('index', {title:"Página inicial"});
-    });
-    
-    UserHelper.add_routes(app);
-    WalletHelper.add_routes(app);
+function hash (msg, key) {
+  return crypto.createHmac('sha256', key).update(msg).digest('hex');
 };
+
+function required(val) { return val && val.length; }
+
+var Schema = mongoose.Schema
+  , ObjectId = Schema.ObjectId;
+
+var WalletSchema = new Schema({
+	user: ObjectId,
+	year: String,
+	month: String,
+	type: String,
+	wallet: Number,
+	inflow: Number,
+});
+
+
+Wallet = mongoose.model('Wallet', WalletSchema);
+exports.Wallet = Wallet;

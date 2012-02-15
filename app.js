@@ -77,12 +77,17 @@ String.prototype.randomString = function(stringLength) {
 app.dynamicHelpers({
     messages: function(req){
         var msgs = req.session.messages;
-        req.session.messages = null;
+        req.session.messages = [];
         return msgs
     },
     user: function (req) {
         if (req.session)
             return req.session.user;
+    },
+    errors: function(req) {
+    	var msgs = req.session.errors;
+    	req.session.errors = [];
+    	return msgs;
     }
 });
 

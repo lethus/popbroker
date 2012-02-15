@@ -19,15 +19,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var utils = require('./utils.js');
-var UserHelper = require('./controllers/users.js');
-var WalletHelper = require('./controllers/wallet.js');
+var _ = require('underscore');
+var modelWallet = require('../models/wallet.js');
+var modelUser = require('../models.js');
+var forms = require('../forms.js');
+var utils = require('../utils.js');
+var Wallet = modelWallet.Wallet;
+var User = modelUser.User;
 
-module.exports = function(app){
-    app.get('/', function(req, res){
-        res.render('index', {title:"Página inicial"});
+exports.add_routes = function (app) {
+	app.get('/home', function(req, res) {
+    	res.render('wallet/home');
     });
-    
-    UserHelper.add_routes(app);
-    WalletHelper.add_routes(app);
 };

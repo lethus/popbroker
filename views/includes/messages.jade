@@ -1,10 +1,18 @@
-- if (messages)
-  - if (messages.errors)
-    div.notification.error(style='position:absolute; top: 65px; right: 300px')
-      span
-      div.text
-        p
-          strong 
-            | Error: <br/>
-          - each message in messages.errors
-            li #{message}       
+- if (errors.length)
+  div.notification.error
+    span
+    div.text
+      p
+        strong 
+          | Error: <br/>
+        - each error in errors
+          li #{error}       
+- if (messages.length)
+  div.notification.success
+    span
+    div.text
+      p
+        strong
+          | Sucesso! <br/>
+        - each message in messages
+          li #{message}
