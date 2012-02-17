@@ -22,13 +22,37 @@
 var _ = require('underscore');
 var modelWallet = require('../models/wallet.js');
 var modelUser = require('../models.js');
+var formWallet = require('../forms/wallet.js');
 var forms = require('../forms.js');
 var utils = require('../utils.js');
 var Wallet = modelWallet.Wallet;
 var User = modelUser.User;
 
 exports.add_routes = function (app) {
-	app.get('/home', function(req, res) {
+	app.get('/home', function (req, res) {
     	res.render('wallet/home');
+    });
+    
+    app.post('/home', formWallet.addWalletForm, 
+    function (req, res) {
+    	if (req.form.isValid) {
+    		
+    		var o = new Wallet;
+    		o.year = req.form.year;
+    		o.month = req.form.month;
+    		o.type = req.form.type;
+    		o.wallet = req.form.wallet;
+    		o.inflow = req.form.inflow;
+    		o.save();
+    		
+    		res.redirect('back');
+    	}
+    	else {
+    		req.session.errors = _.union(
+    			req.session.errors||[],
+    			req.form.errors);
+    			
+			res.redirect('back');
+    	}
     });
 };

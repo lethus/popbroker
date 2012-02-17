@@ -25,13 +25,27 @@ var form = require("express-form"),
 	validate = form.validate;
 	
 var addWalletForm = form(
-	filter("ano").trim(),
-	validate("ano")
+	filter("year").trim(),
+	validate("year")
 		.required(null, "Escolha um ano"),
 		
-	filter("mes").trim(),
-	validate("mes")
-		.required(null, "Escolha um mês")
+	filter("month").trim(),
+	validate("month")
+		.required(null, "Escolha um mês"),
+		
+	filter('type').trim(),
+	validate('type')
+		.required(null, "Escolha um Tipo de investimento"),
+	
+	filter('wallet').custom(function (value) {
+		return (value.length ? value : '0');
+	}),
+	
+	filter('inflow').custom(function (value) {
+		return (value.length ? value : '0');
+	})
 );
+
+
 
 exports.addWalletForm = addWalletForm;
