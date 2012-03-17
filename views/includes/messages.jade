@@ -1,18 +1,20 @@
-- if (errors.length)
-  div.notification.error
-    span
-    div.text
-      p
-        strong 
-          | Error: <br/>
-        - each error in errors
-          li #{error}       
-- if (messages.length)
-  div.notification.success
-    span
-    div.text
-      p
-        strong
-          | Sucesso! <br/>
-        - each message in messages
-          li #{message}
+- if (errors)
+  - if (errors.length)
+    div.notification.error
+      span
+      div.text
+        p
+          strong 
+            | Error: <br/>
+          - each error in errors
+            li #{error}       
+- if (messages)
+  - if (messages.length)
+    div.notification.success
+      span
+      div.text
+        p
+          strong
+            | Sucesso! <br/>
+          - each message in messages
+            li #{message}

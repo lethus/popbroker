@@ -4,7 +4,7 @@ block content
   div.container
     h1 Home do usuário
 
-
+    a(href="/logout/") SAIR
     form#public-form(method="POST") 
       p Ano:
         select(name='year')
@@ -27,18 +27,18 @@ block content
           option(value="12") Dezembro
       p Tipo investimento: 
         select(name='type')
-          option(value='cp') Cardeneta de Poupança
-          option(value='tp') Títulos Públicos Federais
-          option(value='db') Debêntures
-          option(value='cd') CDB e RDB
-          option(value='fr') Fundo de renda fixa
-          option(value='fa') Fundo de investimentos em ações
           option(value='ac') Ações
+          option(value='cp') Cardeneta de Poupança
+          option(value='cd') CDB e RDB
+          option(value='db') Debêntures
           option(value='dr') Derivativos
-          option(value='ou') Ouro
-          option(value='me') Moeda estrangeira
-          option(value='fi') Fundos imobiliários
+          option(value='fa') Fundo Investimento - Ações
+          option(value='fi') Fundo Investimento - Imobiliários
+          option(value='fr') Fundo Renda Fixa
           option(value='im') Imóveis
+          option(value='me') Moeda estrangeira
+          option(value='ou') Ouro
+          option(value='tp') Títulos Públicos Federais
       p Carteira: 
         input#input-text(name='wallet')
       p Aporte: 

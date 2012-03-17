@@ -91,6 +91,16 @@ app.dynamicHelpers({
     }
 });
 
+function requiresLogin(req, res, next) {
+	if (req.session.user) {
+		next();
+	} else {
+		res.redirect('/?redir=' + req.url);
+	}
+};
+
+loadGlobals = [requiresLogin];
+
 app.configure('development', function(){
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
 });

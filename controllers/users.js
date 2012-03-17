@@ -42,7 +42,7 @@ exports.add_routes = function (app) {
                         if (user) {
                             req.session.regenerate(function(){
                                 req.session.user = user;
-                                res.redirect('/home/');
+                                res.redirect(req.body.redir || '/home/');
                             });
                         } else {
                             if (!req.session.errors)

@@ -29,15 +29,16 @@ var Wallet = modelWallet.Wallet;
 var User = modelUser.User;
 
 exports.add_routes = function (app) {
-	app.get('/home', function (req, res) {
+	app.get('/home', loadGlobals, function (req, res) {
     	res.render('wallet/home');
     });
     
-    app.post('/home', formWallet.addWalletForm, 
+    app.post('/home', loadGlobals, formWallet.addWalletForm, 
     function (req, res) {
     	if (req.form.isValid) {
     		
     		var o = new Wallet;
+    		o.user = req.session.user._id;
     		o.year = req.form.year;
     		o.month = req.form.month;
     		o.type = req.form.type;

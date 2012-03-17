@@ -25,7 +25,8 @@ var WalletHelper = require('./controllers/wallet.js');
 
 module.exports = function(app){
     app.get('/', function(req, res){
-        res.render('index', {title:"Página inicial"});
+        res.render('index', {title:"Página inicial", 
+        redir: req.query.redir});
     });
     
     UserHelper.add_routes(app);
