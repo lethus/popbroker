@@ -20,9 +20,8 @@
  */
 
 var _ = require('underscore');
-var models = require('../models.js');
-var forms = require('../forms.js');
-var utils = require('../utils.js');
+var models = require('../models/users.js');
+var forms = require('../forms/users.js');
 var User = models.User;
 
 exports.add_routes = function (app) {

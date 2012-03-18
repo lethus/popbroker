@@ -21,10 +21,8 @@
 
 var _ = require('underscore');
 var modelWallet = require('../models/wallet.js');
-var modelUser = require('../models.js');
+var modelUser = require('../models/users.js');
 var formWallet = require('../forms/wallet.js');
-var forms = require('../forms.js');
-var utils = require('../utils.js');
 var Wallet = modelWallet.Wallet;
 var User = modelUser.User;
 

@@ -19,7 +19,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var models = require("./models.js");
+var models = require("../models/users.js");
 
 var form = require("express-form"),
     filter = form.filter,

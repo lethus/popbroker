@@ -45,7 +45,8 @@ html(xmlns='http://www.w3.org/1999/xhtml')
             #head-break-right
                 #login-box
                   form(action="/login/", method="POST")
-                    input(type='hidden', name='redir', value=redir)
+                    - if (typeof(redir) != "undefined")
+                      input(type='hidden', name='redir', value=redir)
                     div
                       input#email.input-text(name="email", type="text", placeholder="e-mail")
                       input.input-text(name="password", type="password", placeholder="senha")

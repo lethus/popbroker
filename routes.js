@@ -19,7 +19,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var utils = require('./utils.js');
 var UserHelper = require('./controllers/users.js');
 var WalletHelper = require('./controllers/wallet.js');
 
