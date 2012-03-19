@@ -26,31 +26,76 @@ var formWallet = require('../forms/wallet.js');
 var Wallet = modelWallet.Wallet;
 var User = modelUser.User;
 
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/popbroker');
+
 exports.add_routes = function (app) {
 	app.get('/home', loadGlobals, function (req, res) {
-    	res.render('wallet/home');
+
+		var map = function() {
+			var out = {};
+			out[this.month] = {
+			    'wallet': this.wallet,
+				'inflow': this.inflow
+			};
+			
+			emit(this.year, out);
+		};
+
+		var reduce = function(key, values) {
+			var out = {};
+			var valuesSize = values.length;
+			for (var i=0; i<valuesSize;i++) {
+				var p = values[i];
+				for (var j in p) {
+					if (!out[j]) {
+						out[j] = {'wallet':0, 'inflow':0};
+					}
+					out[j]['wallet'] += p[j]['wallet'];
+					out[j]['inflow'] += p[j]['inflow'];
+				}
+			}
+			
+			return out;
+		}
+
+		var command = {
+			mapreduce: 'wallets',
+			map: map.toString(),
+			reduce: reduce.toString(),
+			sort: {},
+			query: {'user': mongoose.Types.ObjectId(req.session.user) },
+			out:{'inline':1}
+		};
+
+		mongoose.connection.db.executeDbCommand(command, function(err, dbres) {
+			if (err) throw err;
+			res.render('wallet/home', {
+					cursor: dbres.documents[0].results
+				});
+		});
     });
-    
-    app.post('/home', loadGlobals, formWallet.addWalletForm, 
+
+    app.post('/home', loadGlobals, formWallet.addWalletForm,
     function (req, res) {
     	if (req.form.isValid) {
-    		
+
     		var o = new Wallet;
-    		o.user = req.session.user._id;
+    		o.user = req.session.user;
     		o.year = req.form.year;
     		o.month = req.form.month;
     		o.type = req.form.type;
     		o.wallet = req.form.wallet;
     		o.inflow = req.form.inflow;
     		o.save();
-    		
+
     		res.redirect('back');
     	}
     	else {
     		req.session.errors = _.union(
     			req.session.errors||[],
     			req.form.errors);
-    			
+
 			res.redirect('back');
     	}
     });

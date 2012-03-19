@@ -40,7 +40,7 @@ exports.add_routes = function (app) {
                     function (err, user) {
                         if (user) {
                             req.session.regenerate(function(){
-                                req.session.user = user;
+                                req.session.user = user._id;
                                 res.redirect(req.body.redir || '/home/');
                             });
                         } else {
@@ -71,7 +71,7 @@ exports.add_routes = function (app) {
                     function (err, user) {
                         if ((user)&&(!err)) {
                             req.session.regenerate(function(){
-                                req.session.user = user;
+                                req.session.user = user._id;
                                 res.redirect('/home/');
                             });
                         } else {

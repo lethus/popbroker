@@ -44,3 +44,20 @@ block content
         input#input-text(name='inflow')
       p
         input#submit(type='submit', value='Salvar')
+      
+      table(width="100%")
+        thead
+          tr
+            th Ano
+            th Mês
+            th Carteira
+            th Aporte
+        tbody
+        - each wallet in cursor
+          - each mes, i in wallet.value
+            tr
+              td= wallet._id
+              td= i
+              td= mes.wallet
+              td= mes.inflow
+
