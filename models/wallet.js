@@ -42,6 +42,57 @@ var WalletSchema = new Schema({
 	inflow: Number,
 });
 
+exports.getWallets = function(user_id, callback) {
+	var map = function() {
+			var out = {};
+			out[this.month] = {
+				'wallet': this.wallet,
+				'inflow': this.inflow,
+				'shares': 0,
+				'shares_price': 0,
+				'perc_month': 0,
+				'perc_year':0,
+				'perc_all':0
+			};
+		
+			emit(this.year, out);
+		};
 
+	var reduce = function(key, values) {
+		var out = {};
+
+		for (var i=0; i < values.length;i++) {
+			var p = values[i];
+			for (var j in p) {
+				if (!out[j]) {
+					out[j] = {
+					'wallet':0, 
+					'inflow':0,
+					'shares': 0,
+					'shares_price': 0,
+					'perc_month': 0,
+					'perc_year': 0,
+					'perc_all': 0
+					};
+				}
+				out[j]['wallet'] += p[j]['wallet'];
+				out[j]['inflow'] += p[j]['inflow'];
+			}
+		}
+		return out;
+	}
+
+	var command = {
+		mapreduce: 'wallets',
+		map: map.toString(),
+		reduce: reduce.toString(),
+		sort: {},
+		query: {'user': mongoose.Types.ObjectId(user_id) },
+		out:{'inline':1}
+	};
+	
+	return command;
+}
+		
 Wallet = mongoose.model('Wallet', WalletSchema);
 exports.Wallet = Wallet;

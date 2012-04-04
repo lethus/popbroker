@@ -26,61 +26,122 @@ var formWallet = require('../forms/wallet.js');
 var Wallet = modelWallet.Wallet;
 var User = modelUser.User;
 
-var mongoose = require('mongoose');
+var mongoose = require('mongoose')
+	, mongoTypes = require('mongoose-types');
+	
 mongoose.connect('mongodb://localhost/popbroker');
 
 exports.add_routes = function (app) {
-	app.get('/home', loadGlobals, function (req, res) {
 
-		var map = function() {
-			var out = {};
-			out[this.month] = {
-			    'wallet': this.wallet,
-				'inflow': this.inflow
-			};
-			
-			emit(this.year, out);
-		};
-
-		var reduce = function(key, values) {
-			var out = {};
-			var valuesSize = values.length;
-			for (var i=0; i<valuesSize;i++) {
-				var p = values[i];
-				for (var j in p) {
-					if (!out[j]) {
-						out[j] = {'wallet':0, 'inflow':0};
-					}
-					out[j]['wallet'] += p[j]['wallet'];
-					out[j]['inflow'] += p[j]['inflow'];
+	app.get('/pullwallet', loadGlobals, function (req, res) {
+		Wallet.findOne({user: mongoose.Types.ObjectId(req.session.user),
+			year: req.query.year, month: req.query.month, 
+			type: req.query.type}, function(error, wallet) {
+				res.writeHead(200, {'Content-Type': 'text/plain'});
+				if (wallet) {
+					res.end('_getValues({inflow: '+ wallet.inflow +
+							', wallet: '+ wallet.wallet +'})');
 				}
-			}
-			
-			return out;
-		}
-
-		var command = {
-			mapreduce: 'wallets',
-			map: map.toString(),
-			reduce: reduce.toString(),
-			sort: {},
-			query: {'user': mongoose.Types.ObjectId(req.session.user) },
-			out:{'inline':1}
-		};
-
+				else {
+					res.end('_getValues({inflow: 0, wallet: 0})');
+				}
+				
+			});
+	});
+	
+	
+	app.get('/home', loadGlobals, function (req, res) {
+		var cursor;
+		var command = modelWallet.getWallets(req.session.user);
 		mongoose.connection.db.executeDbCommand(command, function(err, dbres) {
 			if (err) throw err;
 			res.render('wallet/home', {
-					cursor: dbres.documents[0].results
+					cursor: calcProfit(dbres.documents[0].results)
 				});
 		});
+		
+		function calcProfit(dbres) {
+			var wallet = 0,
+				prev_shares = 0, 
+				prev_shares_price = 0, 
+				shares = 0, 
+				shares_price = 0,
+				year_shares_price = 0;
+				start_shares_price = 0;
+								
+			for (var i=0; i<dbres.length; i++) {
+				var db = dbres[i];
+				for (var k in db.value) {
+					var p = db.value[k];
+					
+					if (typeof p == 'undefined') {
+						if (prev_shares != 0) {
+							p = {
+								'wallet': wallet,
+								'inflow': 0,
+								'shares': prev_shares.toFixed(3),
+								'shares_price': prev_shares_price.toFixed(4),
+								'perc_month': 0,
+								'perc_year': 0,
+								'perc_all': 0
+							}
+						}
+					}
+					else {
+						if (prev_shares == 0) {
+						wallet = p.wallet;
+						shares = p.wallet;
+						shares_price = p.wallet / shares;
+						year_shares_price = shares_price;
+						start_shares_price = shares_price;
+						
+						p.wallet = p.wallet.toFixed(2);
+						p.inflow = p.inflow.toFixed(2);
+						p.shares = shares.toFixed(3);
+						p.shares_price = shares_price.toFixed(4);
+						} else {
+							wallet = p.wallet;
+							shares = (p.inflow/prev_shares_price) + prev_shares;
+							shares_price = p.wallet / shares;
+						
+							p.wallet = p.wallet.toFixed(2);
+							p.inflow = p.inflow.toFixed(2);
+							p.shares = shares.toFixed(3);
+							p.shares_price = shares_price.toFixed(4);
+							p.perc_month = 
+								(((shares_price - prev_shares_price) / prev_shares_price) * 100)
+								.toFixed(2);
+							p.perc_year =
+								(((shares_price - year_shares_price) / year_shares_price) * 100)
+								.toFixed(2);
+							p.perc_all = 
+								(((shares_price - start_shares_price) / start_shares_price) * 100)
+								.toFixed(2);
+						}
+					
+						prev_shares = shares;
+						prev_shares_price = shares_price;
+					}
+
+					if (typeof p != 'undefined')
+						db.value[k] = p;
+				}
+				year_shares_price = prev_shares_price;
+			}
+						
+			return dbres;
+		};
+		
+		
+		
+		
     });
 
     app.post('/home', loadGlobals, formWallet.addWalletForm,
     function (req, res) {
     	if (req.form.isValid) {
-
-    		var o = new Wallet;
+    				
+			var o = new Wallet;
     		o.user = req.session.user;
     		o.year = req.form.year;
     		o.month = req.form.month;

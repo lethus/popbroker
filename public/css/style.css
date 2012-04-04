@@ -578,3 +578,7 @@ p{
 	height:auto !important;
 	cursor:pointer;
 }
+
+.addWallet {
+    width: 230px;
+}

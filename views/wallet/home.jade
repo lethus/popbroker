@@ -1,63 +1,81 @@
 extends ../private-main-layout
-
+block head
+  script(type="text/javascript", src="/js/home.js")
+  
 block content
   div.container
     h1 Home do usuário
-
-    form#public-form(method="POST") 
-      p Ano:
-        select(name='year')
-          option(value='2010') 2010
-          option(value='2011') 2011
-          option(value='2012') 2012
-      p Mês:
-        select(name='month')
-          option(value="1") Janeiro
-          option(value="2") Fevereiro
-          option(value="3") Março
-          option(value="4") Abril
-          option(value="5") Maio
-          option(value="6") Junho
-          option(value="7") Julho
-          option(value="8") Agosto
-          option(value="9") Setembro
-          option(value="10") Outubro
-          option(value="11") Novembro
-          option(value="12") Dezembro
-      p Tipo investimento: 
-        select(name='type')
-          option(value='ac') Ações
-          option(value='cp') Cardeneta de Poupança
-          option(value='cd') CDB e RDB
-          option(value='db') Debêntures
-          option(value='dr') Derivativos
-          option(value='fa') Fundo Investimento - Ações
-          option(value='fi') Fundo Investimento - Imobiliários
-          option(value='fr') Fundo Renda Fixa
-          option(value='im') Imóveis
-          option(value='me') Moeda estrangeira
-          option(value='ou') Ouro
-          option(value='tp') Títulos Públicos Federais
-      p Carteira: 
-        input#input-text(name='wallet')
-      p Aporte: 
-        input#input-text(name='inflow')
-      p
-        input#submit(type='submit', value='Salvar')
+    
+    div.addWallet
+      form#private-form(method="POST") 
+        p 
+          label(for="year") Ano:
+          input#input-text(name="year", id="year", style="width: 47%")
+        p 
+          select(name="month", id="month", data-native-menu="false")
+            option Escolha um mês...
+            option(value="1") Janeiro
+            option(value="2") Fevereiro
+            option(value="3") Março
+            option(value="4") Abril
+            option(value="5") Maio
+            option(value="6") Junho
+            option(value="7") Julho
+            option(value="8") Agosto
+            option(value="9") Setembro
+            option(value="10") Outubro
+            option(value="11") Novembro
+            option(value="12") Dezembro
+        p 
+          select(name="type", id="type", data-native-menu="false")
+            option Escolha um tipo de investimento ...
+            option(value="ac") Ações
+            option(value="cp") Cardeneta de Poupança
+            option(value="cd") CDB e RDB
+            option(value="db") Debêntures
+            option(value="dr") Derivativos
+            option(value="fa") FI - Ações
+            option(value="fi") FI - Imobiliários
+            option(value="fr") Fundo Renda Fixa
+            option(value="im") Imóveis
+            option(value="me") Moeda estrangeira
+            option(value="ou") Ouro
+            option(value="tp") Títulos Públicos Federais
+        p 
+          label(for="wallet") Carteira: 
+          input#input-text(name="wallet", id="wallet")
+        p 
+          label(for="inflow") Aporte: 
+          input#input-text(name="inflow", id="inflow")
+        p
+          input#submit(type="submit", value="Salvar", data-theme="b", data-icon="star")
       
-      table(width="100%")
-        thead
+    table(width="100%")
+      thead
+        tr
+          th Ano
+          th Mês
+          th Carteira
+          th Aporte
+          th Cotas
+          th Valor Cotas
+          th % Mês
+          th % Ano
+          th Histórico
+      tbody
+      - each wallet in cursor
+        - each mes, i in wallet.value
           tr
-            th Ano
-            th Mês
-            th Carteira
-            th Aporte
-        tbody
-        - each wallet in cursor
-          - each mes, i in wallet.value
-            tr
-              td= wallet._id
-              td= i
-              td= mes.wallet
-              td= mes.inflow
+            td= wallet._id
+            td= i
+            td= mes.wallet
+            td= mes.inflow
+            td= mes.shares
+            td= mes.shares_price
+            td= mes.perc_month
+            td= mes.perc_year
+            td= mes.perc_all
+              
+              
+
 
