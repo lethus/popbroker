@@ -37,8 +37,10 @@
                 cache: false,
                 timeout: 5000,
                 success: function(data) {
-                    $('#inflow').attr('value', data.inflow);
-                    $('#wallet').attr('value', data.wallet);
+                	if (data.inflow != 0)
+                    	$('#inflow').attr('value', data.inflow);
+                	if (data.wallet != 0)
+                    	$('#wallet').attr('value', data.wallet);
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     alert('Ocorreu um error ao pegar informações do banco!: ' + 

@@ -131,26 +131,29 @@ exports.add_routes = function (app) {
 						
 			return dbres;
 		};
-		
-		
-		
-		
     });
 
     app.post('/home', loadGlobals, formWallet.addWalletForm,
     function (req, res) {
     	if (req.form.isValid) {
-    				
-			var o = new Wallet;
-    		o.user = req.session.user;
-    		o.year = req.form.year;
-    		o.month = req.form.month;
-    		o.type = req.form.type;
-    		o.wallet = req.form.wallet;
-    		o.inflow = req.form.inflow;
-    		o.save();
+			Wallet.findOne({user: mongoose.Types.ObjectId(req.session.user),
+				year: req.form.year, month: req.form.month, 
+				type: req.form.type}, function(error, wallet) {
+				
+				var o = new Wallet;
+				if (wallet)
+					o = wallet;
+				
+				o.user = req.session.user;
+				o.year = req.form.year;
+				o.month = req.form.month;
+				o.type = req.form.type;
+				o.wallet = req.form.wallet;
+				o.inflow = req.form.inflow;
+				o.save();
 
-    		res.redirect('back');
+				res.redirect('back');
+			});
     	}
     	else {
     		req.session.errors = _.union(

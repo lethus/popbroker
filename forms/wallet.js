@@ -32,10 +32,14 @@ var addWalletForm = form(
 	filter("month").trim(),
 	validate("month")
 		.required(null, "Escolha um mês"),
+	validate("month")
+		.isNumeric("Escolha um mês"),
 		
 	filter('type').trim(),
 	validate('type')
-		.required(null, "Escolha um Tipo de investimento"),
+		.required(null, "Escolha um tipo de investimento"),
+	validate("type")
+		.maxLength(2, "Escolha um tipo de investimento"),
 	
 	filter('wallet').custom(function (value) {
 		return (value.length ? value : '0');
