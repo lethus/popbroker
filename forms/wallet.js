@@ -42,11 +42,11 @@ var addWalletForm = form(
 		.maxLength(2, "Escolha um tipo de investimento"),
 	
 	filter('wallet').custom(function (value) {
-		return (value.length ? value.replace(",", "") : '0');
+		return (value.length ? value.replace(".", "").replace(",", ".") : '0');
 	}),
 	
 	filter('inflow').custom(function (value) {
-		return (value.length ? value.replace(",", "") : '0');
+		return (value.length ? value.replace(".", "").replace(",", ".") : '0');
 	})
 );
 

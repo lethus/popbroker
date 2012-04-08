@@ -60,7 +60,15 @@ exports.add_routes = function (app) {
 				});
 		});
 		
+	
 		function calcProfit(dbres) {
+			Number.prototype.formatMoney = function(c){
+				var d = ",";
+				var t = ".";
+				var n = this, c = isNaN(c = Math.abs(c)) ? 2 : c, d = d == undefined ? "," : d, t = t == undefined ? "." : t, s = n < 0 ? "-" : "", i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "", j = (j = i.length) > 3 ? j % 3 : 0;
+			   	return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+			 };
+			 
 			var wallet = 0,
 				prev_shares = 0, 
 				prev_shares_price = 0, 
@@ -79,8 +87,8 @@ exports.add_routes = function (app) {
 							p = {
 								'wallet': wallet,
 								'inflow': 0,
-								'shares': prev_shares.toFixed(3),
-								'shares_price': prev_shares_price.toFixed(4),
+								'shares': prev_shares.formatMoney(3),
+								'shares_price': prev_shares_price.formatMoney(4),
 								'perc_month': 0,
 								'perc_year': 0,
 								'perc_all': 0
@@ -95,28 +103,28 @@ exports.add_routes = function (app) {
 						year_shares_price = shares_price;
 						start_shares_price = shares_price;
 						
-						p.wallet = p.wallet.toFixed(2);
-						p.inflow = p.inflow.toFixed(2);
-						p.shares = shares.toFixed(3);
-						p.shares_price = shares_price.toFixed(4);
+						p.wallet = p.wallet.formatMoney(2);
+						p.inflow = p.inflow.formatMoney(2);
+						p.shares = shares.formatMoney(3);
+						p.shares_price = shares_price.formatMoney(4);
 						} else {
 							wallet = p.wallet;
 							shares = (p.inflow/prev_shares_price) + prev_shares;
 							shares_price = p.wallet / shares;
 						
-							p.wallet = p.wallet.toFixed(2);
-							p.inflow = p.inflow.toFixed(2);
-							p.shares = shares.toFixed(3);
-							p.shares_price = shares_price.toFixed(4);
+							p.wallet = p.wallet.formatMoney(2);
+							p.inflow = p.inflow.formatMoney(2);
+							p.shares = shares.formatMoney(3);
+							p.shares_price = shares_price.formatMoney(4);
 							p.perc_month = 
 								(((shares_price - prev_shares_price) / prev_shares_price) * 100)
-								.toFixed(2);
+								.formatMoney(2);
 							p.perc_year =
 								(((shares_price - year_shares_price) / year_shares_price) * 100)
-								.toFixed(2);
+								.formatMoney(2);
 							p.perc_all = 
 								(((shares_price - start_shares_price) / start_shares_price) * 100)
-								.toFixed(2);
+								.formatMoney(2);
 						}
 					
 						prev_shares = shares;

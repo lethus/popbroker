@@ -1,8 +1,9 @@
 (function($){
 	$(document).ready(function(){      
-	  $('.money').priceFormat({
+	  	$('.money').priceFormat({
 			prefix: '',
-			thousandsSeparator: ',',
+			thousandsSeparator: '.',
+			centsSeparator: ',',
 			allowNegative: true
 		});
 	});
