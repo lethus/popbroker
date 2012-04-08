@@ -35,8 +35,8 @@ var Schema = mongoose.Schema
 
 var WalletSchema = new Schema({
 	user: ObjectId,
-	year: String,
-	month: String,
+	year: Number,
+	month: Number,
 	type: String,
 	wallet: Number,
 	inflow: Number,

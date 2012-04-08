@@ -30,7 +30,7 @@ var mongoose = require('mongoose')
 	, mongoTypes = require('mongoose-types');
 	
 mongoose.connect('mongodb://localhost/popbroker');
-
+			 
 exports.add_routes = function (app) {
 
 	app.get('/pullwallet', loadGlobals, function (req, res) {
@@ -60,79 +60,94 @@ exports.add_routes = function (app) {
 				});
 		});
 		
-	
 		function calcProfit(dbres) {
 			Number.prototype.formatMoney = function(c){
-				var d = ",";
-				var t = ".";
+				var d = ",", t = ".";
 				var n = this, c = isNaN(c = Math.abs(c)) ? 2 : c, d = d == undefined ? "," : d, t = t == undefined ? "." : t, s = n < 0 ? "-" : "", i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "", j = (j = i.length) > 3 ? j % 3 : 0;
-			   	return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
-			 };
-			 
+				return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+			};
+
 			var wallet = 0,
 				prev_shares = 0, 
 				prev_shares_price = 0, 
+				prev_perc_year = 0,
+				prev_perc_all = 0,
 				shares = 0, 
 				shares_price = 0,
-				year_shares_price = 0;
+				year_shares_price = 0,
 				start_shares_price = 0;
 								
 			for (var i=0; i<dbres.length; i++) {
 				var db = dbres[i];
-				for (var k in db.value) {
-					var p = db.value[k];
+				
+				var last = 0; // variavel para salvar o ultimo mes salvo no banco para o ano em loop
+				for (last in db.value) {} // varrendo registro do array de objetos para saber qual o ultimo mes salvo
+				
+				for (var k=1; k<=12; k++) {
+					if (k <= last || i < (dbres.length -1)) {
+						
+						var p = db.value[k];
 					
-					if (typeof p == 'undefined') {
-						if (prev_shares != 0) {
-							p = {
-								'wallet': wallet,
-								'inflow': 0,
-								'shares': prev_shares.formatMoney(3),
-								'shares_price': prev_shares_price.formatMoney(4),
-								'perc_month': 0,
-								'perc_year': 0,
-								'perc_all': 0
+						if (typeof p == 'undefined') {
+							if (prev_shares != 0) {
+								p = {
+									'wallet': wallet.formatMoney(2),
+									'inflow': Number("0").formatMoney(2),
+									'shares': prev_shares.formatMoney(3),
+									'shares_price': prev_shares_price.formatMoney(4),
+									'perc_month': Number("0").formatMoney(2),
+									'perc_year': prev_perc_year,
+									'perc_all': prev_perc_all
+								}
 							}
 						}
-					}
-					else {
-						if (prev_shares == 0) {
-						wallet = p.wallet;
-						shares = p.wallet;
-						shares_price = p.wallet / shares;
-						year_shares_price = shares_price;
-						start_shares_price = shares_price;
-						
-						p.wallet = p.wallet.formatMoney(2);
-						p.inflow = p.inflow.formatMoney(2);
-						p.shares = shares.formatMoney(3);
-						p.shares_price = shares_price.formatMoney(4);
-						} else {
+						else {
+							if (prev_shares == 0) {
 							wallet = p.wallet;
-							shares = (p.inflow/prev_shares_price) + prev_shares;
+							shares = p.wallet;
 							shares_price = p.wallet / shares;
+							year_shares_price = shares_price;
+							start_shares_price = shares_price;
 						
 							p.wallet = p.wallet.formatMoney(2);
 							p.inflow = p.inflow.formatMoney(2);
 							p.shares = shares.formatMoney(3);
 							p.shares_price = shares_price.formatMoney(4);
-							p.perc_month = 
-								(((shares_price - prev_shares_price) / prev_shares_price) * 100)
-								.formatMoney(2);
-							p.perc_year =
-								(((shares_price - year_shares_price) / year_shares_price) * 100)
-								.formatMoney(2);
-							p.perc_all = 
-								(((shares_price - start_shares_price) / start_shares_price) * 100)
-								.formatMoney(2);
-						}
+							} else {
+								wallet = p.wallet;
+								shares = (p.inflow/prev_shares_price) + prev_shares;
+								shares_price = p.wallet / shares;
+						
+								p.wallet = p.wallet.formatMoney(2);
+								p.inflow = p.inflow.formatMoney(2);
+								p.shares = shares.formatMoney(3);
+								p.shares_price = shares_price.formatMoney(4);
+								
+								p.perc_month = 
+									(((shares_price - prev_shares_price) / prev_shares_price) * 100)
+									.formatMoney(2);
+								
+								p.perc_year =
+									(((shares_price - year_shares_price) / year_shares_price) * 100)
+									.formatMoney(2);
+								prev_perc_year = p.perc_year;
+								
+								p.perc_all = 
+									(((shares_price - start_shares_price) / start_shares_price) * 100)
+									.formatMoney(2);
+								prev_perc_all = p.perc_all;
+							}
 					
-						prev_shares = shares;
-						prev_shares_price = shares_price;
-					}
+							prev_shares = shares;
+							prev_shares_price = shares_price;
+						}
 
-					if (typeof p != 'undefined')
-						db.value[k] = p;
+						if (typeof p != 'undefined')
+							db.value[k] = p;
+					
+					
+					}
+					
 				}
 				year_shares_price = prev_shares_price;
 			}
