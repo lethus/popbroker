@@ -6,9 +6,10 @@ html(xmlns="http://www.w3.org/1999/xhtml")
 
       link(rel="shortcut icon", href="/img/favico.ico", type="image/x-icon")
       
-      link(href="/css/private.style.css", rel="stylesheet", type="text/css")
       link(href="/css/style.notification.css", rel="stylesheet", type="text/css")
       link(href="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css", rel="stylesheet", type="text/css")
+      link(href="/css/private.style.css", rel="stylesheet", type="text/css")
+      
       
       script(src="http://code.jquery.com/jquery-1.6.4.min.js")
       script(src="/js/jquery.price_format.min.js")
@@ -21,22 +22,23 @@ html(xmlns="http://www.w3.org/1999/xhtml")
       block head
       
   body
-    header.white_head.clearfix
-      hgroup.clearfix.wrapper
-        h1.logo
-          a(href="/home/") PopBroker
-        ul.header_nav
-          li
-            a.home(href='/home/', style="color: #ccc") Home
-          li
-            a.refresh(href="#", style="color: #ccc") Atualizar Carteira
-          li
-            a.user(href="#", style="color: #ccc") Minha Conta
-          li
-            a.sair(href="#", style="color: #ccc") Sair
-    include includes/messages
+    #page(data-role="page")
+      header.white_head.clearfix
+        hgroup.clearfix.wrapper
+          h1.logo
+            a(href="/home/") PopBroker
+          ul.header_nav
+            li
+              a.home(href='/home/', style="color: #ccc") Home
+            li
+              a.update(href="#", style="color: #ccc") Atualizar Carteira
+            li
+              a.user(href="#", style="color: #ccc") Minha Conta
+            li
+              a.sair(href="#", style="color: #ccc") Sair
+      include includes/messages
 
 
-    block content
+      block content
 
-    block foot
+      block foot

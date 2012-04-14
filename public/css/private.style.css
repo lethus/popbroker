@@ -1,6 +1,8 @@
 /** ============ RESET ============= **/
 * {margin: 0; padding: 0; }
 
+*:focus {outline: none;}
+
 html {
   margin: 0px;
   padding: 0px;
@@ -19,7 +21,8 @@ body {
   font-size: 13px;
   font-weight: normal;
   line-height: 18px;
-  color: #404040; }
+  color: #404040; 
+}
 
 h1,
 h2,
@@ -49,10 +52,23 @@ a {
   text-decoration: none;
   line-height: inherit;
   font-weight: inherit; }
-  
+
 /** ============== END RESET =============**/
-.addWallet {
-    width: 230px;
+
+/* =============== HEAD ================== */
+.right {
+float: right;
+}
+
+.container {
+margin-left: auto;
+margin-right: auto;
+clear: both;
+margin-left: auto;
+margin-right: auto;
+clear: both;
+width: 940px;
+padding-top: 70px;
 }
 
 .white_head {
@@ -166,7 +182,232 @@ h1.logo a {
     background: url("../img/icons/running_man.png") left no-repeat;
     padding-left: 26px;
 }
-.header_nav li a.refresh {
+.header_nav li a.update {
     background: url("../img/icons/refresh.png") left no-repeat;
     padding-left: 26px;
 }
+
+/* ============== CONTENT ================== */
+
+
+#addWallet {
+width: 280px;
+float: left;
+display: none;
+font: normal 11px Arial;
+height: 100%;
+}
+
+#addWallet .title {
+padding: 8px;
+line-height: 18px;
+text-align: left;
+vertical-align: top;
+border-bottom: 1px solid #DDD;
+font-weight: bold;
+text-align: center;
+vertical-align: bottom;
+border-collapse: collapse;
+border-spacing: 0;
+font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+font-size: 13px;
+color: #333;
+}
+
+#addWallet .close {
+cursor: pointer;
+float: right;
+}
+
+#addWallet form {
+    padding:20px 0 0 20px;
+}
+
+p.select {
+position: relative;
+left: -8px;
+}
+
+label.ui-input-text { font-size: 14px;}
+
+.table {
+max-width: 100%;
+border-collapse: collapse;
+border-spacing: 0;
+background-color: transparent;
+font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+font-size: 13px;
+line-height: 18px;
+color: #333;
+float: left;
+}
+
+.table th, .table td {
+padding: 8px;
+line-height: 18px;
+text-align: left;
+vertical-align: top;
+border-top: 1px solid #DDD;
+}
+.table th {
+font-weight: bold;
+}
+.table th {
+border-top: none;
+}
+.detail-table td, .detail-table th {
+text-align: center;
+}
+.table thead th {
+vertical-align: bottom;
+}
+
+/*
+.table thead th:last-child, .table td:last-child {
+border-right: 1px solid #DDD;
+}
+.table thead th:first-child, .table td:first-child {
+border-left: 1px solid #DDD;
+}
+*/
+
+.table td {
+vertical-align: middle;
+display: table;
+}
+
+.detail-table td, .detail-table th {
+text-align: center;
+}
+.table tbody tr:hover td,.table tbody tr:hover th{
+background-color:#f5f5f5;
+}
+
+
+.filter-type {
+margin: 0; 
+padding: 0;
+outline-style: none;
+font: normal 11px Arial;
+margin-bottom: -1px;
+padding: 10px;
+padding-bottom: 0px;
+}
+
+.filter-type span {
+display: inline-block;
+font: normal 11px Arial;
+height: 22px;
+vertical-align: middle;
+padding-left: 0px;
+}
+
+.filter-type span:first-of-type {
+padding-left: 0px;
+}
+
+.filter-type li {
+display: inline-block;
+height: 22px;
+margin: 0px 8px;
+vertical-align: middle;
+}
+
+.filter-type li.selected {
+background: transparent url("../img/primary_dimension_selected.png") no-repeat 50% 101%;
+color: #333;
+cursor: default;
+font-weight: bold;
+}
+
+.filter-table {
+background: whiteSmoke;
+border-bottom: 1px solid #E5E5E5;
+border-left: none;
+border-right: none;
+border-top: 1px solid #E5E5E5;
+height: 28px;
+min-width: 600px;
+padding: 4px 10px;
+font-size: 82%;
+vertical-align: middle;
+}
+
+.filter-table span {
+list-style: none;
+margin: 0 6px;
+margin: 0;
+padding: 0;
+}
+
+.filter-table span label {
+color: #666;
+font-size: 11px;
+margin-right: 4px;
+}
+
+.graph span {
+border: 1px solid #BBB;
+border-right: 0px;
+display: inline-block;
+line-height: 0px;
+padding: 2px 4px;
+cursor: pointer;
+}
+
+.graph .selected {
+box-shadow: 0 1px 3px rgba(0,0,0,0.3) inset;
+}
+
+.graph span:first-of-type {
+-moz-border-radius: 2px 0 0 2px;
+border-radius: 2px 0 0 2px;
+border-radius: 2px 0 0 2px;
+}
+
+.graph span:last-of-type {
+-moz-border-radius: 0 2px 2px 0;
+border-radius: 0 2px 2px 0;
+border-radius: 0 2px 2px 0;
+border-right: 1px solid #BBB;
+}
+
+.graph .dados {
+background: no-repeat url("../img/dados_ico.png");
+height: 19px;
+width: 19px;
+display: inline-block;
+position: relative;
+top: 3px;
+left: 3px;
+}
+
+
+.graph .grafico {
+background: no-repeat url("../img/graph_ico.png");
+height: 19px;
+width: 19px;
+display: inline-block;
+position: relative;
+top: 3px;
+left: 3px;
+}
+
+.graph .help {
+background: no-repeat url("../img/help_ico.png");
+height: 19px;
+width: 19px;
+display: inline-block;
+position: relative;
+top: 3px;
+left: 3px;
+}
+
+.graph .update {
+background: no-repeat url("../img/update_ico.png");
+height: 19px;
+width: 19px;
+display: inline-block;
+}
+
+#filter_type { width: 200px;}

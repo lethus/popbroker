@@ -4,78 +4,123 @@ block head
   
 block content
   div.container
-    h1 Home do usuário
     
-    div.addWallet
-      form#private-form(method="POST") 
-        p 
-          label(for="year") Ano:
-          input#input-text(name="year", id="year", style="width: 47%")
-        p 
-          select(name="month", id="month", data-native-menu="false")
-            option Escolha um mês...
-            option(value="1") Janeiro
-            option(value="2") Fevereiro
-            option(value="3") Março
-            option(value="4") Abril
-            option(value="5") Maio
-            option(value="6") Junho
-            option(value="7") Julho
-            option(value="8") Agosto
-            option(value="9") Setembro
-            option(value="10") Outubro
-            option(value="11") Novembro
-            option(value="12") Dezembro
-        p 
-          select(name="type", id="type", data-native-menu="false")
-            option Escolha um tipo de investimento ...
-            option(value="ac") Ações
-            option(value="cp") Cardeneta de Poupança
-            option(value="cd") CDB e RDB
-            option(value="db") Debêntures
-            option(value="dr") Derivativos
-            option(value="fa") FI - Ações
-            option(value="fi") FI - Imobiliários
-            option(value="fr") Fundo Renda Fixa
-            option(value="im") Imóveis
-            option(value="me") Moeda estrangeira
-            option(value="ou") Ouro
-            option(value="tp") Títulos Públicos Federais
-        p 
-          label(for="wallet") Carteira: 
-          input#input-text.money(name="wallet", id="wallet")
-        p 
-          label(for="inflow") Aporte: 
-          input#input-text.money(name="inflow", id="inflow")
-        p
-          input#submit(type="submit", value="Salvar", data-theme="b", data-icon="star")
-      
-    table(width="100%")
-      thead
-        tr
-          th Ano
-          th Mês
-          th Carteira
-          th Aporte
-          th Cotas
-          th Valor Cotas
-          th % Mês
-          th % Ano
-          th Histórico
-      tbody
-      - each wallet in cursor
-        - each mes, i in wallet.value
+    .filter-type
+      ul
+        span.title Filtrar por tipo: 
+        li.selected Todos
+        li
+          a(href="#") Ações
+        li 
+          a(href="#") Poupança
+        li 
+          a(href="#") CDB e RDB
+        li 
+          a(href="#") Debêntures
+        li 
+          a(href="#") Derivativos
+        li 
+          a(href="#") FI-Ações
+        li 
+          a(href="#") FI-Imóveis
+        li 
+          a(href="#") Fundo RF
+        li 
+          a(href="#") Imóveis
+        li 
+          a(href="#") Moeda
+        li 
+          a(href="#") Ouro
+        li 
+          a(href="#") Títulos    
+        
+    .filter-table
+      span
+        label 
+      span.right
+        div.graph
+          span.selected
+            .dados(title="Dados")
+          span
+            .grafico(title="Gráficos")
+          span
+            .help(title="Ajuda")
+          span
+            .update(title="Atualizar Carteira")
+
+    .detail-table 
+      table#dataTable.table(width="100%")
+        thead
           tr
-            td= wallet._id
-            td= i
-            td= mes.wallet
-            td= mes.inflow
-            td= mes.shares
-            td= mes.shares_price
-            td= mes.perc_month
-            td= mes.perc_year
-            td= mes.perc_all
-              
-              
+            th Ano
+            th Mês
+            th Carteira
+            th Aporte
+            th Cotas
+            th Valor Cotas
+            th % Mês
+            th % Ano
+            th Histórico
+        tbody
+        - each wallet in cursor
+          - each mes, i in wallet.value
+            tr
+              td= wallet._id
+              td= i
+              td= mes.wallet
+              td= mes.inflow
+              td= mes.shares
+              td= mes.shares_price
+              td= mes.perc_month
+              td= mes.perc_year
+              td= mes.perc_all
+      
+      #addWallet
+        .title Atualizar Carteira
+          span.close(title="Fechar atualização da carteira")
+            img(src="../img/close_tiny.png")
+        form#private-form(method="POST") 
+          p 
+            label.lblform(for="year") Ano:
+            input#input-text(name="year", id="year", style="width: 47%")
+          p.select
+            select(name="month", id="month", data-native-menu="false")
+              option Escolha um mês...
+              option(value="1") Janeiro
+              option(value="2") Fevereiro
+              option(value="3") Março
+              option(value="4") Abril
+              option(value="5") Maio
+              option(value="6") Junho
+              option(value="7") Julho
+              option(value="8") Agosto
+              option(value="9") Setembro
+              option(value="10") Outubro
+              option(value="11") Novembro
+              option(value="12") Dezembro
+          p.select
+            select(name="type", id="type", data-native-menu="false")
+              option Escolha um tipo ...
+              option(value="ac") Ações
+              option(value="cp") Cardeneta de Poupança
+              option(value="cd") CDB e RDB
+              option(value="db") Debêntures
+              option(value="dr") Derivativos
+              option(value="fa") FI - Ações
+              option(value="fi") FI - Imobiliários
+              option(value="fr") Fundo Renda Fixa
+              option(value="im") Imóveis
+              option(value="me") Moeda estrangeira
+              option(value="ou") Ouro
+              option(value="tp") Títulos Públicos Federais
+          p 
+            label(for="wallet") Carteira: 
+            input#input-text.money(name="wallet", id="wallet")
+          p 
+            label(for="inflow") Aporte: 
+            input#input-text.money(name="inflow", id="inflow")
+          p
+            input#submit(type="submit", value="Salvar", data-theme="b", data-icon="star")
+          
 
 
