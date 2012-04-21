@@ -283,6 +283,8 @@ text-align: center;
 background-color:#f5f5f5;
 }
 
+.negative { color: #930913; }
+.positive { color: #4380d3; }
 
 .filter-type {
 margin: 0; 

@@ -26,14 +26,25 @@
 		        row.cells[8].style.display = "none";               
 			}
 			
-			table.width = "70%";
+			table.width = "628px";
 			addWallet.style.display = "inline"; 
 			
-			//$("#dataTable thead tr:first th:last").style = "none";
+			setSelectedFilter("update");
 		});
 		
 	    $(".close").click(function() {
-    		var table = document.all.dataTable;
+		 	closeUpdate();
+			setSelectedFilter("dados");
+    	});
+    	
+    	$(".dados").click(function() {
+    		closeUpdate();
+    		setSelectedFilter("dados");
+    	});
+    });
+    
+    function closeUpdate() {
+    	var table = document.all.dataTable;
 		  	var addWallet = document.all.addWallet;
 			var rowCount = table.rows.length;
 			
@@ -47,11 +58,30 @@
 			}
 			
 			table.width = "100%";
-			addWallet.style.display = "none"; 
-    	});
-    });
+			addWallet.style.display = "none";
+    }
     
-
+	function setSelectedFilter(option) {
+		document.all.dados.className = "";
+		document.all.grafico.className = "";
+		document.all.ajuda.className = "";
+		document.all.update.className = "";
+		
+		switch(option) {
+			case "dados":
+				document.all.dados.className = "selected";
+				break;
+			case "grafico":	
+				document.all.grafico.className = "selected";
+				break;
+			case "ajuda":
+				document.all.ajuda.className = "selected";
+				break;
+			case "update":
+				document.all.update.className = "selected";
+				break;
+		}
+	}
     
     
     function pullWallet() {

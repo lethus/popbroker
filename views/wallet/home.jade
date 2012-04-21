@@ -39,28 +39,28 @@ block content
         label 
       span.right
         div.graph
-          span.selected
-            .dados(title="Dados")
-          span
-            .grafico(title="Gráficos")
-          span
-            .help(title="Ajuda")
-          span
-            .update(title="Atualizar Carteira")
+          span#dados.selected
+            .dados(title="Dados", rel="tooltip")
+          span#grafico
+            .grafico(title="Gráficos", rel="tooltip")
+          span#ajuda
+            .help(title="Ajuda", rel="tooltip")
+          span#update
+            .update(title="Atualizar Carteira", rel="tooltip")
 
     .detail-table 
       table#dataTable.table(width="100%")
         thead
           tr
-            th Ano
-            th Mês
-            th Carteira
-            th Aporte
-            th Cotas
-            th Valor Cotas
-            th % Mês
-            th % Ano
-            th Histórico
+            th(width="73px") Ano
+            th(width="68px") Mês
+            th(width="110px") Carteira
+            th(width="110px") Aporte
+            th(width="121px") Cotas
+            th(width="147px") Valor Cotas
+            th(width="95px") % Mês
+            th(width="95px") % Ano
+            th(width="121px") Histórico
         tbody
         - each wallet in cursor
           - each mes, i in wallet.value
@@ -71,13 +71,32 @@ block content
               td= mes.inflow
               td= mes.shares
               td= mes.shares_price
-              td= mes.perc_month
-              td= mes.perc_year
-              td= mes.perc_all
+              - if (mes.perc_month < "0,00")
+                td.negative= mes.perc_month
+              - if (mes.perc_month > "0,00")
+                td.positive= mes.perc_month
+              - if ((mes.perc_month == "0,00") || (mes.perc_month == "0"))
+                td= mes.perc_month
+              
+              - if (mes.perc_year < "0,00")
+                td.negative= mes.perc_year
+              - if (mes.perc_year > "0,00")
+                td.positive= mes.perc_year
+              - if ((mes.perc_year == "0,00") || (mes.perc_year == "0"))
+                td= mes.perc_year
+              
+              - if (mes.perc_all < "0,00")
+                td.negative= mes.perc_all
+              - if (mes.perc_all > "0,00")
+                td.positive= mes.perc_all
+              - if ((mes.perc_all == "0,00") || (mes.perc_all == "0"))
+                td= mes.perc_all
+      
+      
       
       #addWallet
         .title Atualizar Carteira
-          span.close(title="Fechar atualização da carteira")
+          span.close(title="Fechar atualização da carteira", rel="tooltip")
             img(src="../img/close_tiny.png")
         form#private-form(method="POST") 
           p 
