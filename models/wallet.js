@@ -42,7 +42,7 @@ var WalletSchema = new Schema({
 	inflow: Number,
 });
 
-exports.getWallets = function(user_id, callback) {
+exports.getWallets = function(user_id, type, callback) {
 	var map = function() {
 			var out = {};
 			out[this.month] = {
@@ -81,13 +81,31 @@ exports.getWallets = function(user_id, callback) {
 		}
 		return out;
 	}
+	
+	function query() {
+		var out = {};
+		if (type) {
+			out = {
+				'user' : mongoose.Types.ObjectId(user_id),
+				'type' : type,
+			};
+		}
+		else {
+			out = {
+				'user' : mongoose.Types.ObjectId(user_id),
+			};
+		}
+		
+		return out;
+	}
 
 	var command = {
 		mapreduce: 'wallets',
 		map: map.toString(),
 		reduce: reduce.toString(),
 		sort: {},
-		query: {'user': mongoose.Types.ObjectId(user_id) },
+		//query: {'user': mongoose.Types.ObjectId(user_id) },
+		query: query(),
 		out:{'inline':1}
 	};
 	

@@ -1,4 +1,47 @@
 (function($){
+	$('#page').live('pagecreate',function(event){
+		var myselect = $("select#type");
+		var type_selected = document.all.type_selected.value;
+		switch (type_selected) {
+			case "ac":
+				myselect[0].selectedIndex = 1;
+				break;
+			case "cp":
+				myselect[0].selectedIndex = 2;
+				break;
+			case "cd":
+				myselect[0].selectedIndex = 3;
+				break;
+			case "db":
+				myselect[0].selectedIndex = 4;
+				break;
+			case "dr":
+				myselect[0].selectedIndex = 5;
+				break;
+			case "fa":
+				myselect[0].selectedIndex = 6;
+				break;
+			case "fi":
+				myselect[0].selectedIndex = 7;
+				break;
+			case "fr":
+				myselect[0].selectedIndex = 8;
+				break;
+			case "im":
+				myselect[0].selectedIndex = 9;
+				break;
+			case "me":
+				myselect[0].selectedIndex = 10;
+				break;
+			case "ou":
+				myselect[0].selectedIndex = 11;
+				break;
+			case "tp":
+				myselect[0].selectedIndex = 12;
+				break;
+		}
+	});
+
 	$(document).ready(function(){
       $("#type").change(function () {
         pullWallet();
@@ -26,7 +69,7 @@
 		        row.cells[8].style.display = "none";               
 			}
 			
-			table.width = "628px";
+			table.width = "627px";
 			addWallet.style.display = "inline"; 
 			
 			setSelectedFilter("update");

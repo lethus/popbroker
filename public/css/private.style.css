@@ -191,11 +191,12 @@ h1.logo a {
 
 
 #addWallet {
-width: 280px;
+width: 311px;
 float: left;
 display: none;
 font: normal 11px Arial;
 height: 100%;
+border-left: 1px solid #DDD;
 }
 
 #addWallet .title {

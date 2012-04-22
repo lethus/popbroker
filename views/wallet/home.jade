@@ -3,36 +3,90 @@ block head
   script(type="text/javascript", src="/js/custom.home.js")
   
 block content
+  input(type="hidden", id="type_selected", value=type || '')
   div.container
     
     .filter-type
       ul
         span.title Filtrar por tipo: 
-        li.selected Todos
-        li
-          a(href="#") Ações
-        li 
-          a(href="#") Poupança
-        li 
-          a(href="#") CDB e RDB
-        li 
-          a(href="#") Debêntures
-        li 
-          a(href="#") Derivativos
-        li 
-          a(href="#") FI-Ações
-        li 
-          a(href="#") FI-Imóveis
-        li 
-          a(href="#") Fundo RF
-        li 
-          a(href="#") Imóveis
-        li 
-          a(href="#") Moeda
-        li 
-          a(href="#") Ouro
-        li 
-          a(href="#") Títulos    
+        
+        - if (type)
+          li
+            a(href="/home/") Todos
+        - else
+          li.selected Todos
+        
+        - if (type == "ac")
+          li.selected Ações
+        - else
+          li
+            a(href="/home/?type=ac") Ações
+        
+        - if (type == "cp")
+          li.selected Poupança
+        - else
+          li 
+            a(href="/home/?type=cp") Poupança
+        
+        - if (type == "cd")
+          li.selected CDB e RDB
+        - else
+          li 
+            a(href="/home/?type=cd") CDB e RDB
+        
+        - if (type == "db")
+          li.selected Debêntures
+        - else
+          li 
+            a(href="/home/?type=db") Debêntures
+            
+        - if (type == "dr")
+          li.selected Derivativos
+        - else
+          li 
+            a(href="/home/?type=dr") Derivativos
+            
+        - if (type == "fa")
+          li.selected FI-Ações
+        - else
+          li 
+            a(href="/home/?type=fa") FI-Ações
+            
+        - if (type == "fi")
+          li.selected FI-Imóveis
+        - else
+          li 
+            a(href="/home/?type=fi") FI-Imóveis
+            
+        - if (type == "fr")
+          li.selected Fundo RF
+        - else
+          li 
+            a(href="/home/?type=fr") Fundo RF
+            
+        - if (type == "im")
+          li.selected Imóveis
+        - else
+          li 
+            a(href="/home/?type=im") Imóveis
+            
+        - if (type == "me")
+          li.selected Moeda
+        - else
+          li 
+            a(href="/home/?type=me") Moeda
+            
+        - if (type == "ou")
+          li.selected Ouro
+        - else
+          li 
+            a(href="/home/?type=ou") Ouro
+            
+        - if (type == "tp")
+          li.selected Títulos
+        - else
+          li 
+            a(href="/home/?type=tp") Títulos    
         
     .filter-table
       span

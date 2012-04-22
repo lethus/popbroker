@@ -52,15 +52,18 @@ exports.add_routes = function (app) {
 	
 	app.get('/home', loadGlobals, function (req, res) {
 		var cursor;
-		var command = modelWallet.getWallets(req.session.user);
+		var type = req.query["type"];
+		var command = modelWallet.getWallets(req.session.user, type);
 		mongoose.connection.db.executeDbCommand(command, function(err, dbres) {
 			if (err) throw err;
 			res.render('wallet/home', {
-					cursor: calcProfit(dbres.documents[0].results)
+					'type': type,
+					cursor: calcProfit(dbres.documents[0].results),
 				});
 		});
-		
-		function calcProfit(dbres) {
+    });
+    
+    function calcProfit(dbres) {
 			Number.prototype.formatMoney = function(c){
 				var d = ",", t = ".";
 				var n = this, c = isNaN(c = Math.abs(c)) ? 2 : c, d = d == undefined ? "," : d, t = t == undefined ? "." : t, s = n < 0 ? "-" : "", i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "", j = (j = i.length) > 3 ? j % 3 : 0;
@@ -154,7 +157,6 @@ exports.add_routes = function (app) {
 						
 			return dbres;
 		};
-    });
 
     app.post('/home', loadGlobals, formWallet.addWalletForm,
     function (req, res) {
