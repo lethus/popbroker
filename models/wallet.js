@@ -104,7 +104,6 @@ exports.getWallets = function(user_id, type, callback) {
 		map: map.toString(),
 		reduce: reduce.toString(),
 		sort: {},
-		//query: {'user': mongoose.Types.ObjectId(user_id) },
 		query: query(),
 		out:{'inline':1}
 	};

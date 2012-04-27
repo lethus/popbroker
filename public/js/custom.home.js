@@ -43,65 +43,77 @@
 	});
 
 	$(document).ready(function(){
-      $("#type").change(function () {
-        pullWallet();
-      })
-      
-      $("#month").change(function () {
-        pullWallet();
-      })
-      
-      $("#year").change(function () {
-        pullWallet();
-      })
-      
-      $(".update").click(function() {
-		  	var table = document.all.dataTable;
+		$("#type").change(function () {
+			pullWallet();
+		})
+
+		$("#month").change(function () {
+			pullWallet();
+		})
+
+		$("#year").change(function () {
+			pullWallet();
+		})
+
+		function hideTable() {
+			var table = document.all.dataTable;
 		  	var addWallet = document.all.addWallet;
 			var rowCount = table.rows.length;
-			
+	
 			for(var i=0; i<rowCount; i++) {
 				var row = table.rows[i];
 				if (i!=0)
 					row.cells[5].style.borderRight = "1px solid #DDD"
-		        row.cells[6].style.display = "none"; 
-		        row.cells[7].style.display = "none"; 
-		        row.cells[8].style.display = "none";               
+				row.cells[6].style.display = "none"; 
+				row.cells[7].style.display = "none"; 
+				row.cells[8].style.display = "none";               
 			}
-			
+	
 			table.width = "627px";
-			addWallet.style.display = "inline"; 
-			
+			addWallet.style.display = "none";
+			viewGraph.style.display = "none";
+		}
+      
+		$(".update").click(function() {
+			hideTable();
+			addWallet.style.display = "inline";
 			setSelectedFilter("update");
 		});
-		
-	    $(".close").click(function() {
+
+		$(".grafico").click(function() {
+		  	hideTable();
+		  	viewGraph.style.display = "inline";
+			setSelectedFilter("grafico");
+		});
+
+		$(".close").click(function() {
 		 	closeUpdate();
 			setSelectedFilter("dados");
-    	});
-    	
-    	$(".dados").click(function() {
-    		closeUpdate();
-    		setSelectedFilter("dados");
-    	});
+		});
+
+		$(".dados").click(function() {
+			closeUpdate();
+			setSelectedFilter("dados");
+		});
     });
     
     function closeUpdate() {
-    	var table = document.all.dataTable;
-		  	var addWallet = document.all.addWallet;
-			var rowCount = table.rows.length;
-			
-			for(var i=0; i<rowCount; i++) {
-				var row = table.rows[i];
-				if (i!=0) 
-					row.cells[5].style.borderRight = "none";
-			    row.cells[6].style.display = ""; 
-			    row.cells[7].style.display = ""; 
-			    row.cells[8].style.display = ""; 
-			}
-			
-			table.width = "100%";
-			addWallet.style.display = "none";
+		var table = document.all.dataTable;
+		var addWallet = document.all.addWallet;
+		var rowCount = table.rows.length;
+
+		for(var i=0; i<rowCount; i++) {
+			var row = table.rows[i];
+			if (i!=0) 
+				row.cells[5].style.borderRight = "none";
+			row.cells[6].style.display = ""; 
+			row.cells[7].style.display = ""; 
+			row.cells[8].style.display = ""; 
+		}
+
+		table.width = "100%";
+		addWallet.style.display = "none";
+		viewGraph.style.display = "none";
     }
     
 	function setSelectedFilter(option) {

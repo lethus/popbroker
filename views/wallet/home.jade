@@ -1,7 +1,32 @@
 extends ../private-main-layout
 block head
   script(type="text/javascript", src="/js/custom.home.js")
-  
+  script
+    google.load('visualization', '1', {packages: ['corechart']});
+  script= graph
+  script
+    function drawVisualization() {
+
+      
+        // Create and draw the visualization.
+        var ac = new google.visualization.ComboChart(document.getElementById('visualization'));
+        ac.draw(data, {
+          title : '',
+          width: 300,
+          height: 400,
+          vAxis: {title: "Cups"},
+          hAxis: {title: "Month"},
+          seriesType: "bars",
+          series: {1: {type: "line"}}
+        });
+      }
+      
+
+      google.setOnLoadCallback(drawVisualization);
+      
+      
+      
+          
 block content
   input(type="hidden", id="type_selected", value=type || '')
   div.container
@@ -146,13 +171,11 @@ block content
               - if ((mes.perc_all == "0,00") || (mes.perc_all == "0"))
                 td= mes.perc_all
       
-      
-      
       #addWallet
         .title Atualizar Carteira
           span.close(title="Fechar atualização da carteira", rel="tooltip")
             img(src="../img/close_tiny.png")
-        form#private-form(method="POST") 
+        form#update-form(method="POST") 
           p 
             label.lblform(for="year") Ano:
             input#input-text(name="year", id="year", style="width: 47%")
@@ -195,5 +218,9 @@ block content
           p
             input#submit(type="submit", value="Salvar", data-theme="b", data-icon="star")
           
-
-
+      #viewGraph
+        .title Valorização Mensal/Anual 
+          span.close(title="Fechar gráficos", rel="tooltip")
+            img(src="../img/close_tiny.png")
+        form#graph-form(method="POST")
+          div#visualization

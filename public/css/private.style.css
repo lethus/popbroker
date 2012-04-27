@@ -190,7 +190,7 @@ h1.logo a {
 /* ============== CONTENT ================== */
 
 
-#addWallet {
+#addWallet, #viewGraph {
 width: 311px;
 float: left;
 display: none;
@@ -199,7 +199,7 @@ height: 100%;
 border-left: 1px solid #DDD;
 }
 
-#addWallet .title {
+#addWallet .title, #viewGraph .title {
 padding: 8px;
 line-height: 18px;
 text-align: left;
@@ -215,12 +215,12 @@ font-size: 13px;
 color: #333;
 }
 
-#addWallet .close {
+#addWallet .close, #viewGraph .close {
 cursor: pointer;
 float: right;
 }
 
-#addWallet form {
+#addWallet form, #viewGraph form {
     padding:20px 0 0 20px;
 }
 

@@ -57,11 +57,46 @@ exports.add_routes = function (app) {
 		mongoose.connection.db.executeDbCommand(command, function(err, dbres) {
 			if (err) throw err;
 			res.render('wallet/home', {
-					'type': type,
+					type: type,
 					cursor: calcProfit(dbres.documents[0].results),
+					graph: calcGraph(dbres.documents[0].results),
 				});
 		});
     });
+    
+    function calcGraph(dbres) {
+       	var months = [];
+    	var perc_years = [];
+    	var perc_months = [];
+    	var str = "var data = google.visualization.arrayToDataTable([['Mês', '% Mês', '% Ano']";
+    	for (var i=0; i<dbres.length; i++) {
+    		var db = dbres[i];
+				
+				var last = 0; // variavel para salvar o ultimo mes salvo no banco para o ano em loop
+				for (last in db.value) {} // varrendo registro do array de objetos para saber qual o ultimo mes salvo
+				
+				for (var k=1; k<=12; k++) {
+					if (k <= last || i < (dbres.length -1)) {
+						var p = db.value[k];
+						if (typeof p != 'undefined') {
+						str += ",['"+k+"'";
+						str += "," + p.perc_month.toString().replace(",",".");
+						str += "," + p.perc_year.toString().replace(",",".") + "]";
+						}
+					}
+				}
+    	}
+    	str += "]);";
+    	str +=  "var datas = google.visualization.arrayToDataTable(["+
+    "['Month', 'Bolivia', 'Ecuador', 'Madagascar', 'Papua New Guinea', 'Rwanda', 'Average']," +
+    "['2004/05',  165,      938,         522,             998,           450,      614.6]," +
+    "['2005/06',  135,      1120,        599,             1268,          288,      682]," + 
+    "['2006/07',  157,      1167,        587,             807,           397,      623]," +
+    "['2007/08',  139,      1110,        615,             968,           215,      609.4]," +
+    "['2008/09',  136,      691,         629,             1026,          366,      569.6]" +
+  "]);";
+    	return str;
+    }
     
     function calcProfit(dbres) {
 			Number.prototype.formatMoney = function(c){
@@ -147,10 +182,7 @@ exports.add_routes = function (app) {
 
 						if (typeof p != 'undefined')
 							db.value[k] = p;
-					
-					
 					}
-					
 				}
 				year_shares_price = prev_shares_price;
 			}
