@@ -199,6 +199,10 @@ height: 100%;
 border-left: 1px solid #DDD;
 }
 
+#viewGraph {
+    width: 568px;
+}
+
 #addWallet .title, #viewGraph .title {
 padding: 8px;
 line-height: 18px;

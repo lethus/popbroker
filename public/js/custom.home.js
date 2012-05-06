@@ -54,34 +54,17 @@
 		$("#year").change(function () {
 			pullWallet();
 		})
-
-		function hideTable() {
-			var table = document.all.dataTable;
-		  	var addWallet = document.all.addWallet;
-			var rowCount = table.rows.length;
-	
-			for(var i=0; i<rowCount; i++) {
-				var row = table.rows[i];
-				if (i!=0)
-					row.cells[5].style.borderRight = "1px solid #DDD"
-				row.cells[6].style.display = "none"; 
-				row.cells[7].style.display = "none"; 
-				row.cells[8].style.display = "none";               
-			}
-	
-			table.width = "627px";
-			addWallet.style.display = "none";
-			viewGraph.style.display = "none";
-		}
-      
+     
 		$(".update").click(function() {
-			hideTable();
+			closeUpdate();
+			hideTableTiny();
 			addWallet.style.display = "inline";
 			setSelectedFilter("update");
 		});
 
 		$(".grafico").click(function() {
-		  	hideTable();
+		  	closeUpdate();
+		  	hideTableBig();
 		  	viewGraph.style.display = "inline";
 			setSelectedFilter("grafico");
 		});
@@ -95,8 +78,100 @@
 			closeUpdate();
 			setSelectedFilter("dados");
 		});
+		
+		createChart();
+		
     });
+   
+    function QueryString(variavel){
+		var variaveis=location.search.replace(/\x3F/,"").replace(/\x2B/g," ").split("&")
+		var nvar    
+			 if(variaveis!=""){
+			 var qs=[]
+				for(var i=0;i<variaveis.length;i++){
+				nvar=variaveis[i].split("=")
+				qs[nvar[0]]=unescape(nvar[1])
+				}
+			return qs[variavel]
+			}
+		return "";
+	}
     
+    function createChart() {
+		var type = QueryString("type");
+
+		$.getJSON("http://localhost:3000/graph/?type=" + type.toString(), function(data) {
+			// Create the chart
+			window.chart = new Highcharts.StockChart({
+				chart : {
+					renderTo : 'container',
+					width: 540
+				},
+
+				yAxis: {
+		            labels: {
+		                formatter: function() {
+		                    return (this.value > 0 ? '+' : '') + this.value + '%';
+		                }
+		            },
+		            plotLines: [{
+		                value: 0,
+		                width: 2,
+		                color: 'silver'
+		            }]
+            	},
+            	
+            	tooltip: {
+		            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y} %</b><br/>',
+		            valueDecimals: 2
+            	},
+		
+				series : data
+			});
+		});
+    	
+    }
+    
+    function hideTableTiny() {
+		var table = document.all.dataTable;
+	  	var addWallet = document.all.addWallet;
+		var rowCount = table.rows.length;
+
+		for(var i=0; i<rowCount; i++) {
+			var row = table.rows[i];
+			if (i!=0)
+				row.cells[5].style.borderRight = "1px solid #DDD"
+			row.cells[6].style.display = "none"; 
+			row.cells[7].style.display = "none"; 
+			row.cells[8].style.display = "none";               
+		}
+
+		table.width = "627px";
+		addWallet.style.display = "none";
+		viewGraph.style.display = "none";
+	}
+	
+	function hideTableBig() {
+		var table = document.all.dataTable;
+	  	var addWallet = document.all.addWallet;
+		var rowCount = table.rows.length;
+
+		for(var i=0; i<rowCount; i++) {
+			var row = table.rows[i];
+			if (i!=0)
+				row.cells[3].style.borderRight = "1px solid #DDD"
+			row.cells[4].style.display = "none"; 
+			row.cells[5].style.display = "none"; 
+			row.cells[6].style.display = "none"; 
+			row.cells[7].style.display = "none"; 
+			row.cells[8].style.display = "none";               
+		}
+
+		table.width = "370px";
+		addWallet.style.display = "none";
+		viewGraph.style.display = "none";
+	}
+	
     function closeUpdate() {
 		var table = document.all.dataTable;
 		var addWallet = document.all.addWallet;
@@ -104,8 +179,12 @@
 
 		for(var i=0; i<rowCount; i++) {
 			var row = table.rows[i];
-			if (i!=0) 
+			if (i!=0) {
+				row.cells[3].style.borderRight = "none";
 				row.cells[5].style.borderRight = "none";
+			}
+			row.cells[4].style.display = ""; 
+			row.cells[5].style.display = ""; 
 			row.cells[6].style.display = ""; 
 			row.cells[7].style.display = ""; 
 			row.cells[8].style.display = ""; 
@@ -173,4 +252,5 @@
             });
           }     
     }
+    
 })(jQuery);

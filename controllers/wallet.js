@@ -49,6 +49,18 @@ exports.add_routes = function (app) {
 			});
 	});
 	
+	app.get('/graph', loadGlobals, function (req, res) {
+		var cursor;
+		var type = req.query["type"];
+		var command = modelWallet.getWallets(req.session.user, type);
+		mongoose.connection.db.executeDbCommand(command, function(err, dbres) {
+			if (err) throw err;
+			cursor: calcProfit(dbres.documents[0].results);
+			arr = calcGraph(dbres.documents[0].results);
+			res.end(JSON.stringify(arr));
+				
+		});
+	});
 	
 	app.get('/home', loadGlobals, function (req, res) {
 		var cursor;
@@ -57,45 +69,55 @@ exports.add_routes = function (app) {
 		mongoose.connection.db.executeDbCommand(command, function(err, dbres) {
 			if (err) throw err;
 			res.render('wallet/home', {
-					type: type,
-					cursor: calcProfit(dbres.documents[0].results),
-					graph: calcGraph(dbres.documents[0].results),
-				});
+				type: type,
+				cursor: calcProfit(dbres.documents[0].results),
+				graph: calcGraph(dbres.documents[0].results),
+			});
 		});
     });
     
     function calcGraph(dbres) {
-       	var months = [];
-    	var perc_years = [];
-    	var perc_months = [];
-    	var str = "var data = google.visualization.arrayToDataTable([['Mês', '% Mês', '% Ano']";
-    	for (var i=0; i<dbres.length; i++) {
-    		var db = dbres[i];
-				
-				var last = 0; // variavel para salvar o ultimo mes salvo no banco para o ano em loop
-				for (last in db.value) {} // varrendo registro do array de objetos para saber qual o ultimo mes salvo
-				
-				for (var k=1; k<=12; k++) {
-					if (k <= last || i < (dbres.length -1)) {
-						var p = db.value[k];
+       	arr_month = [];
+       	arr_year = [];
+       	arr_all = [];
+       	arr = [];
+       	for (var i=0; i<dbres.length; i++) {
+       		var db = dbres[i];
+       		
+       		var last = 0; // variavel para salvar o ultimo mes salvo no banco para o ano em loop
+			for (last in db.value) {} // varrendo registro do array de objetos para saber qual o ultimo mes salvo
+			
+			for (var k=1; k<=12; k++) {
+				if (k <= last || i < (dbres.length -1)) {
+					var p = db.value[k];
+					
 						if (typeof p != 'undefined') {
-						str += ",['"+k+"'";
-						str += "," + p.perc_month.toString().replace(",",".");
-						str += "," + p.perc_year.toString().replace(",",".") + "]";
+							item_m = [], item_y = [], item_a = [];
+							data = new Date(db._id, k, 1);
+							
+							item_m[0] = new Number(data);
+							item_m[1] = new Number(p.perc_month.toString()
+								.replace(",","."));
+							arr_month.push(item_m);
+							
+							item_y[0] = new Number(data);
+							item_y[1] = new Number(p.perc_year.toString()
+								.replace(",","."));
+							arr_year.push(item_y);
+							
+							item_a[0] = new Number(data);
+							item_a[1] = new Number(p.perc_all.toString()
+								.replace(",","."));
+							arr_all.push(item_a);
 						}
-					}
 				}
-    	}
-    	str += "]);";
-    	str +=  "var datas = google.visualization.arrayToDataTable(["+
-    "['Month', 'Bolivia', 'Ecuador', 'Madagascar', 'Papua New Guinea', 'Rwanda', 'Average']," +
-    "['2004/05',  165,      938,         522,             998,           450,      614.6]," +
-    "['2005/06',  135,      1120,        599,             1268,          288,      682]," + 
-    "['2006/07',  157,      1167,        587,             807,           397,      623]," +
-    "['2007/08',  139,      1110,        615,             968,           215,      609.4]," +
-    "['2008/09',  136,      691,         629,             1026,          366,      569.6]" +
-  "]);";
-    	return str;
+			}
+       	}
+       	
+       	arr[0] = { data: arr_month, name: "Mes", marker: { enabled: true, radius: 3}, shadow: true };
+       	arr[1] = { data: arr_year, name: "Ano", marker: { enabled: true, radius: 3}, shadow: true };
+       	arr[2] = { data: arr_all, name: "Historico", marker: { enabled: true, radius: 3}, shadow: true };
+       	return arr;
     }
     
     function calcProfit(dbres) {
