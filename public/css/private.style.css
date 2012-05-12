@@ -418,3 +418,12 @@ display: inline-block;
 }
 
 #filter_type { width: 200px;}
+
+
+.dmonth { float: left; }
+
+.dmonth p {
+    color: #333333;
+    font: bold 18px Arial;
+    padding: 1px 0 0 45px;
+}

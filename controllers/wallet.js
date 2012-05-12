@@ -49,6 +49,13 @@ exports.add_routes = function (app) {
 			});
 	});
 	
+	app.get('/detail_month', loadGlobals, function (req, res) {
+		Wallet.find({year: req.query.year, month: req.query.month}, function (err, docs) {
+			if (err) throw err;
+			res.end("_getValues(" + JSON.stringify(docs) + ")");
+		});
+	});
+	
 	app.get('/graph', loadGlobals, function (req, res) {
 		var cursor;
 		var type = req.query["type"];
@@ -70,17 +77,15 @@ exports.add_routes = function (app) {
 			if (err) throw err;
 			res.render('wallet/home', {
 				type: type,
-				cursor: calcProfit(dbres.documents[0].results),
-				graph: calcGraph(dbres.documents[0].results),
+				cursor: calcProfit(dbres.documents[0].results)
 			});
 		});
     });
     
     function calcGraph(dbres) {
-       	arr_month = [];
-       	arr_year = [];
-       	arr_all = [];
-       	arr = [];
+       	var arr_month = [];
+       	var arr_year = [];
+       	var arr = [];
        	for (var i=0; i<dbres.length; i++) {
        		var db = dbres[i];
        		
@@ -104,11 +109,6 @@ exports.add_routes = function (app) {
 							item_y[1] = new Number(p.perc_year.toString()
 								.replace(",","."));
 							arr_year.push(item_y);
-							
-							item_a[0] = new Number(data);
-							item_a[1] = new Number(p.perc_all.toString()
-								.replace(",","."));
-							arr_all.push(item_a);
 						}
 				}
 			}
@@ -116,7 +116,6 @@ exports.add_routes = function (app) {
        	
        	arr[0] = { data: arr_month, name: "Mes", marker: { enabled: true, radius: 3}, shadow: true };
        	arr[1] = { data: arr_year, name: "Ano", marker: { enabled: true, radius: 3}, shadow: true };
-       	arr[2] = { data: arr_all, name: "Historico", marker: { enabled: true, radius: 3}, shadow: true };
        	return arr;
     }
     

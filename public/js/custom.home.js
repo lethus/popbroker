@@ -79,9 +79,68 @@
 			setSelectedFilter("dados");
 		});
 		
+		// evento chama o grafico de rentabilidade da carteira
 		createChart();
-		
+		// evento de clique na linha da tabela para abrir os detalhes do mês
+		window.onload = rowHandlers;
     });
+    
+    function rowHandlers() {
+		var table = document.all.dataTable;
+	  	var row_count = table.rows.length;
+	  	for (i=0; i<row_count; i++) {
+	  		var currentRow = table.rows[i];
+	  		currentRow.onclick = function(myrow) {
+	  			return function() {
+	  				var year = myrow.cells[0].innerHTML;
+	  				var month = myrow.cells[1].innerHTML;
+	  				addRow(myrow.rowIndex+1, year, month);
+	  			};
+	  		}(currentRow);
+	  	}
+    }
+    
+    function addRow(position, year, month) {
+    	var table = document.all.dataTable;
+    	var row = table.insertRow(position);
+    	var cell = row.insertCell(0);
+    	cell.colSpan = "9";
+    	var lastrow = table.rows[1];
+    	var lastcell = lastrow.cells[0];
+    	$.ajax({
+                url: 'http://localhost:3000/detail_month/?year=' + year +
+                '&month='+ month,
+                dataType: "jsonp",
+                jsonpCallback: "_getValues",
+                cache: false,
+                timeout: 5000,
+                success: function(data) {
+                	for (i=0; i<data.length; i++) {
+                		var reg = data[i];
+                		var a = document.createElement("a");
+                		a.href = "http://localhost:3000/exclude";
+                		var p = document.createElement("p");
+                		p.innerHTML = reg.type;
+                		var span = document.createElement("span");
+                		span.innerHTML = reg.wallet;
+                		a.appendChild(p);
+                		a.appendChild(span);
+                		lastcell.appendChild(a);
+                	}
+                	
+                	if (data.inflow != 0)
+                    	$('#inflow').attr('value', data.inflow);
+                	if (data.wallet != 0)
+                    	$('#wallet').attr('value', data.wallet);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert('Ocorreu um error ao pegar informações do banco!: ' + 
+                      textStatus + ' ' + errorThrown );
+                }
+            });
+
+    	cell.appendChild(lastcell.cloneNode(true));
+    }
    
     function QueryString(variavel){
 		var variaveis=location.search.replace(/\x3F/,"").replace(/\x2B/g," ").split("&")
@@ -104,7 +163,7 @@
 			// Create the chart
 			window.chart = new Highcharts.StockChart({
 				chart : {
-					renderTo : 'container',
+					renderTo : 'container_graph',
 					width: 540
 				},
 

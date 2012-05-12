@@ -116,6 +116,13 @@ block content
             th(width="95px") % Ano
             th(width="121px") Histórico
         tbody
+        tr
+          td(colspan="9")
+            #master.dmonth
+              p
+                | Lançamentos
+                
+                
         - each wallet in cursor
           - each mes, i in wallet.value
             tr
@@ -145,7 +152,7 @@ block content
                 td.positive= mes.perc_all
               - if ((mes.perc_all == "0,00") || (mes.perc_all == "0"))
                 td= mes.perc_all
-      
+              
       #addWallet
         .title Atualizar Carteira
           span.close(title="Fechar atualização da carteira", rel="tooltip")
@@ -194,8 +201,8 @@ block content
             input#submit(type="submit", value="Salvar", data-theme="b", data-icon="star")
           
       #viewGraph
-        .title Valorização da Carteira 
+        .title Rentabilidade da Carteira 
           span.close(title="Fechar gráficos", rel="tooltip")
             img(src="../img/close_tiny.png")
         form#graph-form(method="POST")
-          div#container
+          div#container_graph
