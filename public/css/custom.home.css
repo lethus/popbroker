@@ -1,0 +1,45 @@
+tr.detail-row td {
+    text-align: left;
+}
+.remove_link { 
+    color: #701042;
+    font-weight: bold;
+}
+.remove_link:hover { 
+    color: #701042;
+    text-decoration: underline;
+    font-weight: bold;
+}
+.detail-row h2 {
+    width: 900px;
+    float: left;
+}
+#records {
+    width: 250px;
+    height: 400px;
+    margin-top: 15px;
+    float: left;
+}
+#chart {
+    width: 650px;
+    height: 400px;
+    margin-left: 10px;
+    float: right;
+}
+#records_chart {
+    min-width: 400px;
+    height: 400px;
+    margin: 0 auto;
+}
+.detail-row p.type {
+    width: 150px;
+    float: left;
+}
+.detail-row p.value {
+    width: 90px;
+    float: left;
+}
+.detail-row p.remove {
+    width: 10px;
+    float: left;
+}

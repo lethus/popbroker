@@ -1,7 +1,9 @@
 extends ../private-main-layout
 block head
   script(type="text/javascript", src="/js/custom.home.js")
-          
+  link(href="/css/custom.home.css", rel="stylesheet", type="text/css")
+  
+  
 block content
   input(type="hidden", id="type_selected", value=type || '')
   div.container
@@ -116,13 +118,8 @@ block content
             th(width="95px") % Ano
             th(width="121px") Histórico
         tbody
-        tr
-          td(colspan="9")
-            #master.dmonth
-              p
-                | Lançamentos
-                
-                
+
+
         - each wallet in cursor
           - each mes, i in wallet.value
             tr
@@ -152,7 +149,32 @@ block content
                 td.positive= mes.perc_all
               - if ((mes.perc_all == "0,00") || (mes.perc_all == "0"))
                 td= mes.perc_all
-              
+        tr(class="detail-row")
+          td(colspan="9")
+            h2 detalhando lançamentos:
+            span.close(title="Fechar detalhamento", rel="tooltip")
+              img(src="../img/close_tiny.png")
+            div#records
+              div
+                p.type Ações
+                p.value 1.200,00 
+                p.remove
+                  a(href="#", class="remove_link tooltip", data-role="none", title="Remover lançamento")
+                    | X
+              div
+                p.type Poupança 
+                p.value 1.000,00
+                p.remove
+                  a(href="#", class="remove_link tooltip", data-role="none", title="Remover lançamento")
+                    | X
+              div
+                p.type Fundo RF 
+                p.value 100,00
+                p.remove
+                  a(href="#", class="remove_link tooltip", data-role="none", title="Remover lançamento")
+                    | X
+            div#chart 
+              div#records_chart             
       #addWallet
         .title Atualizar Carteira
           span.close(title="Fechar atualização da carteira", rel="tooltip")

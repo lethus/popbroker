@@ -67,6 +67,8 @@
 		  	hideTableBig();
 		  	viewGraph.style.display = "inline";
 			setSelectedFilter("grafico");
+			// evento chama o grafico de rentabilidade da carteira
+			createChart();
 		});
 
 		$(".close").click(function() {
@@ -79,10 +81,60 @@
 			setSelectedFilter("dados");
 		});
 		
-		// evento chama o grafico de rentabilidade da carteira
-		createChart();
 		// evento de clique na linha da tabela para abrir os detalhes do mês
 		window.onload = rowHandlers;
+		
+		
+		/* TESTE DE DADOS DO CHART */
+		var chart;
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'records_chart',
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: 'Browser market shares at a specific website, 2010'
+            },
+            tooltip: {
+                formatter: function() {
+                    return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %';
+                }
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        color: '#000000',
+                        connectorColor: '#000000',
+                        formatter: function() {
+                            return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %';
+                        }
+                    }
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Browser share',
+                data: [
+                    ['Firefox',   45.0],
+                    ['IE',       26.8],
+                    {
+                        name: 'Chrome',
+                        y: 12.8,
+                        sliced: true,
+                        selected: true
+                    },
+                    ['Safari',    8.5],
+                    ['Opera',     6.2],
+                    ['Others',   0.7]
+                ]
+            }]
+        });
+        /* TESTE DE DADOS DO CHART */
     });
     
     function rowHandlers() {
@@ -92,6 +144,7 @@
 	  		var currentRow = table.rows[i];
 	  		currentRow.onclick = function(myrow) {
 	  			return function() {
+	  				remRow();
 	  				var year = myrow.cells[0].innerHTML;
 	  				var month = myrow.cells[1].innerHTML;
 	  				addRow(myrow.rowIndex+1, year, month);
@@ -100,13 +153,33 @@
 	  	}
     }
     
+    function remRow() {
+    	// função que remove as linhas antes de adicionar uma nova linha de detalhe
+    	var table = document.all.dataTable;
+    	var row_count = table.rows.length;
+    	for (i=0; i<row_count; i++) {
+    		if (table.rows[i].className == "detail-row") {
+    			table.deleteRow(i);
+    			row_count --;
+    		}
+    	}
+    }
+    
     function addRow(position, year, month) {
+    	// função que adiciona uma linha na tabela de rentabilidade
+    	
+    	//criando a linha
     	var table = document.all.dataTable;
     	var row = table.insertRow(position);
+    	row.className = "detail-row";
     	var cell = row.insertCell(0);
     	cell.colSpan = "9";
-    	var lastrow = table.rows[1];
-    	var lastcell = lastrow.cells[0];
+    	
+    	// criando o titulo
+    	var title = document.createElement("h2");
+    	title.innerHTML = "detalhando lançamentos:";
+    	cell.appendChild(title);
+    	
     	$.ajax({
                 url: 'http://localhost:3000/detail_month/?year=' + year +
                 '&month='+ month,
@@ -117,7 +190,7 @@
                 success: function(data) {
                 	for (i=0; i<data.length; i++) {
                 		var reg = data[i];
-                		var a = document.createElement("a");
+                		var a = document.createElement("div");
                 		a.href = "http://localhost:3000/exclude";
                 		var p = document.createElement("p");
                 		p.innerHTML = reg.type;
@@ -125,7 +198,7 @@
                 		span.innerHTML = reg.wallet;
                 		a.appendChild(p);
                 		a.appendChild(span);
-                		lastcell.appendChild(a);
+                		cell.appendChild(a);
                 	}
                 	
                 	if (data.inflow != 0)
@@ -138,8 +211,6 @@
                       textStatus + ' ' + errorThrown );
                 }
             });
-
-    	cell.appendChild(lastcell.cloneNode(true));
     }
    
     function QueryString(variavel){
